@@ -1,0 +1,15 @@
+# ninja log v6
+3	300	7710225070161858	CMakeFiles/Wizard.dir/main.cpp.obj	e5a85e2a4955618c
+300	358	7710225073130114	Wizard.exe	7ae1115b6606cc44
+2	200	7710226317430187	build.ninja	fcee100f022c607a
+21	56	7710226594654358	CMakeFiles/Wizard.dir/src/GameSave.cpp.obj	cf14f8bb8ed6aa2
+13	355	7710226594584361	CMakeFiles/Wizard.dir/src/Collider.cpp.obj	7ba3a36784e895fc
+27	427	7710226594725526	CMakeFiles/Wizard.dir/src/Platform.cpp.obj	9f4bffa503280f30
+25	1193	7710226594694364	CMakeFiles/Wizard.dir/src/Magic.cpp.obj	7e3299780cdae255
+18	1197	7710226594634356	CMakeFiles/Wizard.dir/src/Game.cpp.obj	bb0ace4910d3c8d2
+23	1201	7710226594674358	CMakeFiles/Wizard.dir/src/Goblin.cpp.obj	d61607524c13a0c3
+29	1205	7710226594745626	CMakeFiles/Wizard.dir/src/Player.cpp.obj	a1d11bad560b1c44
+16	1208	7710226594614357	CMakeFiles/Wizard.dir/src/Enemy.cpp.obj	d65b922751b57a6
+1208	1285	7710226606526978	Wizard.exe	8043e0bb58ac379d
+3	1093	7710823529859161	CMakeFiles/Wizard.dir/main.cpp.obj	e5a85e2a4955618c
+1093	1299	7710823540754761	Wizard.exe	8043e0bb58ac379d
