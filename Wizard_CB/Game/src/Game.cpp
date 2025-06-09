@@ -83,6 +83,8 @@ void Game::render()
 	view.setCenter(player.GetPosition());
 	//window.setView(view);
 	//this->window->draw(floor);
+	view.setCenter(player.GetPosition().x,player.GetPosition().y-150);
+	window->setView(view);
 	this->plat.render(this->window);
 	this->player.render(this->window);
 
