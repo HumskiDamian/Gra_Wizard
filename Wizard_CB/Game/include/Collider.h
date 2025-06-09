@@ -2,7 +2,7 @@
 #define COLLIDER_H
 
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 class Collider
 {
 private:

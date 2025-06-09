@@ -2729,8 +2729,9 @@
 	"Collider.h"
 	"Magic.h"
 
-1749502342 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\collider.h
+1749506117 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\collider.h
 	<SFML/Graphics.hpp>
+	<iostream>
 
 1749502342 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\magic.h
 	<iostream>
@@ -2777,7 +2778,7 @@
 	"Player.h"
 	<cmath>
 
-1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\collider.cpp
+1749506117 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\collider.cpp
 	"Collider.h"
 
 1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\enemy.cpp
