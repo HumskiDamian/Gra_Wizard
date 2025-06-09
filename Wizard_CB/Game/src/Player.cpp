@@ -2,6 +2,41 @@
 
 void Player::initVariables()
 {
+    timerMag=0.f;
+    hpTimer=0.f;
+    TimerT=0.f;
+    texture.loadFromFile("./image/wizard.png");
+    //init fonts, text and bars
+    fridays.loadFromFile("Fonts/Fridays.ttf");
+	hpStat.setSize(sf::Vector2f(150,25));
+	hpStat.setFillColor(sf::Color::Red);
+	hpStat.setPosition(10,10);
+	manaStat.setSize(sf::Vector2f(150,25));
+	manaStat.setFillColor(sf::Color::Blue);
+	manaStat.setPosition(10,40);
+	hpStatL.setSize(sf::Vector2f(150,25));
+	hpStatL.setFillColor(sf::Color(0,0,0,0));
+	hpStatL.setOutlineColor(sf::Color::Black);
+	hpStatL.setOutlineThickness(3);
+	hpStatL.setPosition(10,10);
+	manaStatL.setSize(sf::Vector2f(150,25));
+	manaStatL.setFillColor(sf::Color(0,0,0,0));
+	manaStatL.setOutlineColor(sf::Color::Black);
+	manaStatL.setOutlineThickness(3);
+	manaStatL.setPosition(10,40);
+	hpText.setFont(fridays);
+	hpText.setColor(sf::Color(255,255,255));
+    hpText.setCharacterSize(24);
+    hpText.setPosition(50,10);
+    manaText.setFont(fridays);
+    manaText.setColor(sf::Color(255,255,255));
+    manaText.setCharacterSize(24);
+    manaText.setPosition(40,40);
+    Timer.setFont(fridays);
+	Timer.setColor(sf::Color(255,255,255));
+    Timer.setCharacterSize(24);
+    Timer.setPosition(800,10);
+
 	this->movementSpeed = 500.f;
 	this->hpMax = 100;
 	this->manaMax = 100;
@@ -13,19 +48,25 @@ void Player::initVariables()
 	this->level = 1;
 	this->experienc = 0;
 	this->time = 0.f;
+	this->timerHeal=0.f;
+	this->timerBarrier=0.f;
+	this->barier=0.f;
+	this->barierMana=50;
+	this->apraisalMana=10;
 }
 
 void Player::initShape()
 {
-	this->shape.setFillColor(sf::Color::Red);
+	//this->shape.setFillColor(sf::Color::Red);
 	this->shape.setSize(sf::Vector2f(25.f, 50.f));
-	this->shape.setOrigin(sf::Vector2f(50.f, 50.f) / 2.f);
+	this->shape.setOrigin(sf::Vector2f(25.f, 50.f) / 2.f);
+	this->shape.setTexture(&texture);
 }
 
 
 Player::Player(float x, float y)
 {
-	this->shape.setPosition(550, 50);
+	this->shape.setPosition(300, 200);
 	this->initVariables();
 	this->initShape();
 }
@@ -37,28 +78,40 @@ Player::~Player()
 
 const sf::RectangleShape& Player::getShape() const
 {
-
+	// TODO: tu wstawiæ instrukcjê return
 	return this->shape;
 }
 
-const int& Player::getHp() const
+const float Player::getHp() const
 {
-
+	// TODO: tu wstawiæ instrukcjê return
 	return this->hp;
 }
 
-const int& Player::getHpMax() const
+const float Player::getHpMax() const
 {
-
+	// TODO: tu wstawiæ instrukcjê return
 	return this->hpMax;
 }
-
+//========================================================================================================take damage
 void Player::takeDamage(const int damage)
 {
-	if (this->hp > 0)
-		this->hp -= damage;
+    if(hpTimer<=0){
+        if (this->hp > 0){
+        if(barier==0)
+            this->hp -= damage;
+        if(barier>0){
+            barier-=damage;
+        }
+        if(barier<0)
+            barier=0.f;
+	}
+
 	if (this->hp < 0)
 		this->hp = 0;
+        hpTimer=1;
+    }
+
 }
 
 void Player::gainHealth(const int health)
@@ -69,10 +122,67 @@ void Player::gainHealth(const int health)
 		this->hp = hpMax;
 }
 
-void Player::updateinput(float dTime)
+void Player::updateinput(float dTime, const sf::RenderTarget* target)
 {
 	//keyboard----------------------------------------
+	//heal
+	{
+	if(this->timerHeal<=0){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::H)) {
+            this->timerHeal=3;
+            if(this->mana >=20.f){
+                    mana-=20;
+                if(this->hp>this->hpMax-80.f)
+                    this->hp=this->hpMax;
+                else
+                    this->hp+=80.f;
+            }
+        }
+    }
+    else{
+        timerHeal-=dTime;
+    }
+	}
+	//barier
+	{
+	if(this->timerBarrier<=0){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+            this->timerBarrier=10;
+            if(this->mana >=barierMana){
+                    mana-=barierMana;
+                this->barier=this->hpMax*2;
+            }
+        }
+    }
+    else{
+        timerBarrier-=dTime;
+    }
+	}
+    //apraisal
+    {
+    if(this->timerApraisal<=0){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::V)) {
+            this->timerApraisal=2;
+            if(this->mana >= apraisalMana){
+                    mana-=apraisalMana;
+                this->apraisal=true;
+                this->apraisalTime=5;
+            }
+        }
+    }
+    else{
+        timerApraisal-=dTime;
+    }
+    if(apraisalTime>0.f){
+        apraisalTime-=dTime;
+    }
+    if(apraisalTime<=0.f){
+        this->apraisal=false;
+    }
+    }
+
 	velocity.x *= 0.f;
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		this->velocity.x -= movementSpeed;
@@ -88,59 +198,89 @@ void Player::updateinput(float dTime)
 	//std::cout << canJump << "\n";
 	this->velocity.y += 981.f * dTime;
 
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		this->shape.move(0.f, -this->movementSpeed*dTime);
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		this->shape.move(0.f, this->movementSpeed*dTime);
-	}*/
 	this->shape.move(velocity * dTime);
 
 	//mouse------------------------------
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		if (this->mana >= this->magic.getMana() && magic.getCanActivMagic()) {
+
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if(timerMag<=0.f){
+            if (this->mana >= this->magic.getMana() && magic.getCanActivMagic()) {
 			this->mana -= magic.getMana();
-			magic.shoot(shape.getPosition() + sf::Vector2f(shape.getSize().x / 2.f, shape.getSize().y / 2.f),static_cast<sf::Vector2f>(sf::Mouse::getPosition()));
+			magic.shoot(sf::Vector2f (shape.getPosition()), target);
 			magic.setIncantation_t();
 		}
-		std::cout << "prawy_przycisk---------------------------------" << "\n";
+		//std::cout << "prawy_przycisk---------------------------------" << "\n";
+		timerMag=magic.getTime();
 	}
+	}
+
 
 
 
 }
 void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 {
-	////Left
-	//if (this->shape.getGlobalBounds().left <= 0.f) {
-	//	this->shape.setPosition(0.f, this->shape.getGlobalBounds().top);
-	//}
-	////Right
-	//if (this->shape.getGlobalBounds().left + this->shape.getGlobalBounds().width >= target->getSize().x) {
-	//	this->shape.setPosition(target->getSize().x - this->shape.getGlobalBounds().width, this->shape.getGlobalBounds().top);
-	//}
-	//if (this->shape.getGlobalBounds().top <= 0.f) {
-	//	this->shape.setPosition(this->shape.getGlobalBounds().left, 0.f);
-	//}
-	//if (this->shape.getGlobalBounds().top + this->shape.getGlobalBounds().height >= target->getSize().y) {
-	//	this->shape.setPosition(this->shape.getGlobalBounds().left, target->getSize().y - this->shape.getGlobalBounds().height);
-	//}
+
 
 }
 
-void Player::update(const sf::RenderTarget* target, float dTime)
+void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 {
-	this->updateinput(dTime);
+
+    TimerT+=dTime;
+    if(timerMag>0)
+        timerMag-=dTime;
+    if(hpTimer>0)
+        hpTimer-=dTime;
+
+    {
+        std::stringstream sshp;
+        std::stringstream ssmana;
+        std::stringstream sstime;
+        sshp<<round(this->hp)<<"/"<<this->hpMax;
+        ssmana<<round(this->mana)<<"/"<<this->manaMax;
+        sstime<<round(TimerT);
+
+        hpText.setString(sshp.str());
+        manaText.setString(ssmana.str());
+        Timer.setString(sstime.str());
+        hpStat.setScale(sf::Vector2f(hp/hpMax,1));
+        manaStat.setScale(sf::Vector2f(mana/manaMax,1));
+    }
+    if(round(hp)>0)
+    {
+	this->updateinput(dTime, target);
 	this->levelUp();
 	this->updateWindowBoundsCollision(target);
+    //std::cout << *x<< ", "<<*y<< ", "<< "\n";
+	magic.updateMagic(dTime,x,y);
+	if(this->mana<this->manaMax){
+        this->mana+=dTime;
+	}
+	if(this->hp<this->hpMax){
+        this->hp+=dTime/10;
+	}
+    }
 
-	magic.updateMagic(dTime);
+    //fonts and text
+
+
 }
 
-void Player::render(sf::RenderTarget* target)
+void Player::render(sf::RenderTarget* target, sf::View* view)
 {
+
 	target->draw(this->shape);
 	magic.render(target);
+	target->setView(target->getDefaultView());
+    target->draw(hpStatL);
+	target->draw(hpStat);
+	target->draw(hpText);
+	target->draw(manaStatL);
+	target->draw(manaStat);
+	target->draw(manaText);
+	target->draw(Timer);
+	target->setView(*view);
 }
 
 void Player::levelUp()
@@ -165,7 +305,7 @@ void Player::OnCollision(sf::Vector2f direction)
 		//collision on right
 		this->velocity.x = 0.f;
 	}
-	if (direction.y < 0.f) {
+	if (direction.y <= 0.f) {
 		this->velocity.y = 0.f;
 		this->canJump = true;
 	}
@@ -177,4 +317,18 @@ void Player::OnCollision(sf::Vector2f direction)
 Collider Player::getCollider()
 {
 	return Collider(this->shape);
+}
+bool Player::getApraisal(){
+    return apraisal;
+}
+Magic* Player::magick(){
+    return &magic;
+
+}
+
+float Player::takeRect(sf::RectangleShape& enemy){
+    return magic.takeReck(enemy);
+}
+float Player::getTimer(){
+return TimerT;
 }

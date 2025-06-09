@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <string>
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -16,14 +17,28 @@
 #include "Magic.h"
 
 
+
 class Player
 {
 private:
+    //stats
+    sf::Font fridays;
+    sf::Texture texture;
+	sf::Text hpText;
+	sf::RectangleShape hpStat;
+	sf::RectangleShape hpStatL;
+    sf::Text manaText;
+    sf::RectangleShape manaStat;
+    sf::RectangleShape manaStatL;
+    sf::Text Timer;
+    float TimerT;
 	//shapes
 	sf::RectangleShape shape;
 
-
-
+    //timer
+    float timerHeal;
+    float timerBarrier;
+    float timerApraisal;
 
 	//stats
 	float hp;
@@ -41,8 +56,9 @@ private:
 	void initVariables();
 	void initShape();
 
-
+    float timerMag;
 	//magic
+	float hpTimer;
 	float heal;
 	int healMana;
 	float barier;
@@ -50,6 +66,8 @@ private:
 	float barierRange;
 	int apraisalMana;
 	float time;
+	bool apraisal;
+	float apraisalTime;
 
 	//jump
 	sf::Vector2f velocity;
@@ -63,20 +81,23 @@ public:
 	virtual ~Player();
 
 	const sf::RectangleShape& getShape() const;
-	const int& getHp() const;
-	const int& getHpMax() const;
+	const float getHp() const;
+	const float getHpMax() const;
 
 	void takeDamage(const int damage);
 	void gainHealth(const int health);
-	void updateinput(float dTime);
+	void updateinput(float dTime, const sf::RenderTarget* target);
 	void updateWindowBoundsCollision(const sf::RenderTarget* target);
-	void update(const sf::RenderTarget* target, float dTime);
-	void render(sf::RenderTarget* target);
+	void update(const sf::RenderTarget* target, float dTime, int* x, int* y);
+	void render(sf::RenderTarget* target, sf::View* view);
 	void levelUp();
     sf::Vector2f GetPosition(){return shape.getPosition();}
 	void OnCollision(sf::Vector2f direction);
 	Collider getCollider();
-
+	bool getApraisal();
+	Magic* magick();
+	float takeRect(sf::RectangleShape& enemy);
+	float getTimer();
 
 };
 

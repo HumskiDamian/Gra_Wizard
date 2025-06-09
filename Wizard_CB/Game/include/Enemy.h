@@ -14,43 +14,42 @@
 #include "Collider.h"
 #include "Player.h"
 #include <cmath>
+
 class Enemy
 {
 protected:
-	/*sf::RectangleShape enemy;
-	float hpmax;
-	float hp;
-	float damage;
 
 
-public:
-	Enemy();
-	~Enemy();
-	void initEnemy(float hpMax, float damage);
-	void updateEnemy();
-	void atakEnemy();*/
-
-    sf::RectangleShape body;     // Wygl¹d przeciwnika
-    float health;                // Zdrowie przeciwnika
-    float damage;                // Obra¿enia, jakie zadaje
-    float detectionRadius;       // Zasiêg wykrywania gracza
-    float attackRadius;          // Zasiêg ataku
-    float speed;                 // Prêdkoœæ poruszania siê
-    bool isAttacking;            // Flaga ataku
+    sf::RectangleShape body;
+    float health;
+    float damage;
+    float detectionRadius;
+    float attackRadius;
+    float speed;
+    bool isAttacking;
+    float x;
+    float y;
+    float width;
+    float height;
+    bool canFly;
+    float attackTimer;
 
 public:
     Enemy(float x, float y, float width, float height, float health, float damage, float detectionRadius, float attackRadius, float speed);
     virtual ~Enemy();
 
-    virtual void update(float deltaTime, const Player& player);
-    virtual void render(sf::RenderTarget& target);
+    virtual void update(float deltaTime, Player& player);
+    virtual void render(sf::RenderTarget* target);
 
     bool isPlayerInRange(const Player& player, float range) const;
     virtual void moveToPlayer(const Player& player, float deltaTime);
     virtual void attack(Player& player);
+    virtual void takeDamage(float d);
+    virtual void setPos(int d);
+    sf::RectangleShape& getShape();
 
     bool isDead() const;
-
+    Collider GetCollider();
 };
 
 

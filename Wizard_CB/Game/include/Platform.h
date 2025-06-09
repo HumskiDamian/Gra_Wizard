@@ -15,6 +15,8 @@
 class Platform
 {
 private:
+    sf::Texture texture;
+    sf::Sprite platf;
 	sf::RectangleShape platform;
 public:
 	Platform();
@@ -25,6 +27,7 @@ public:
 	void render(sf::RenderTarget* target);
 	void setSize(sf::Vector2f size);
 	void setPos(sf::Vector2f pos);
+	void setColor(int x, int y, int z, int a);
 };
 
 

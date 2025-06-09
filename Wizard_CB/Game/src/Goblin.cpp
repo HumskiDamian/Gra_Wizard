@@ -1,13 +1,18 @@
 #include "Goblin.h"
 
-Goblin::Goblin(float x, float y)
-    : Enemy(x, y, 50.f, 50.f, 100.f, 10.f, 300.f, 50.f, 150.f) {
-    body.setFillColor(sf::Color::Green);
+Goblin::Goblin()
+    : Enemy(500.f, 300.f, 50.f, 50.f, 100.f, 10.f, 300.f, 50.f, 150.f) {
+        body.setSize(sf::Vector2f(width, height));
+    body.setPosition(x, y);
+    body.setFillColor(sf::Color(44,91,1));
+    body.setOrigin(25.f,25.f);
+    canFly=false;
+
 }
 
 Goblin::~Goblin() {}
 
 void Goblin::attack(Player& player) {
     Enemy::attack(player);
-    // Mo¿esz dodaæ specjalne zachowanie Goblina podczas ataku
+
 }

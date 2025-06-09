@@ -13,28 +13,17 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include "Collider.h"
+#include "Shot_Magic.h"
+
 class Magic
 {
-private:
-	struct Shot {
-		sf::Shape* shape;
-		//sf::CircleShape * shape;          // Kszta³t magii (CircleShape lub RectangleShape)
-		sf::Vector2f direction;       // Kierunek ruchu magii
-		float distanceTraveled;       // Pokonana odleg³oœæ
-		float maxDistance;            // Maksymalna odleg³oœæ
-		float speed;                  // Prêdkoœæ magii
-		float damage;                   // Obra¿enia magii
+protected:
 
-		Shot(sf::Shape* shape  , const sf::Vector2f& direction, float maxDistance, float speed, float damage)
-			: shape(shape), direction(direction), distanceTraveled(0.f), maxDistance(maxDistance), speed(speed), damage(damage) {
-		}
-	};
 
-	sf::CircleShape magic;
-	std::vector<Shot> activeShots;
+	//sf::CircleShape magic;
 	float cooldown;                    // Czas odczekania miêdzy kolejnymi strza³ami
 	float cooldownTimer;
-
+    std::vector<Shot_Magic> activeShots;
 	//magic stats
 	float mana[6];
 	float size[6];
@@ -42,21 +31,27 @@ private:
 	float expRange[6];
 	float distanc[6];
 	float time[6];
+	float speed[6];
 	float proficiency[6];
-	bool isCircular[6];
-	// types_of_magic fire_ball , water_ball , ice_spear , air_blade , rocks , holy_magic
 
+//=============================
+	// [types_of_magic fire_ball , water_ball , ice_spear , air_blade , rocks , holy_magic]
+//=============================
 	//float actTime;
 	//float dist;
-	float speed;
+
+    int x;
+    int y;
+
 	float shorDirec;
 	float sind, cosd;
 	bool incantation;
 
+	float timerMag;
+
 	bool canActivMagic;
 	bool existMagic;
 	int actMagic;
-	sf::Vector2f direction;
 	sf::Vector2f playerPos;
 
 public:
@@ -64,7 +59,6 @@ public:
 	~Magic();
 	//inicjalizacja magii
 	void initMagic();
-	//set magic stats
 	void setMana();
 	void setSize();
 	void setDamage();
@@ -83,11 +77,12 @@ public:
 	bool getCanActivMagic();
 
 
-	//void shoot(const sf::Vector2f& pos);
-    void shoot(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition);
+    void shoot(sf::Vector2f startPosition,const sf::RenderTarget* target);
 
-	void updateMagic(float dTime);
+    float takeReck(sf::RectangleShape& enemy);
+	void updateMagic(float dTime, int* x, int* y);
 	void render(sf::RenderTarget* target);
+	std::vector<Shot_Magic>* getVector();
 };
 
 

@@ -6,10 +6,11 @@
 
 class Goblin : public Enemy {
 public:
-    Goblin(float x, float y);
+    Goblin();
     ~Goblin();
 
     void attack(Player& player) override;
+
 };
 
 
