@@ -6,16 +6,16 @@
 class Collider
 {
 private:
-	sf::RectangleShape& body;
-	bool onGroud;
+    sf::RectangleShape& body;
+    bool onGroud;
 
 public:
-	Collider(sf::RectangleShape& body);
-	~Collider();
-	void Move(float dx, float dy);
-	bool CheckCollider(Collider other, sf::Vector2f& direction, float push);
-	sf::Vector2f GetPosition();
-	sf::Vector2f GetHalfSize();
+    Collider(sf::RectangleShape& body);
+    ~Collider();
+    void Move(float dx, float dy);
+    bool CheckCollider(Collider other, sf::Vector2f& direction, float push);
+    sf::Vector2f GetPosition();
+    sf::Vector2f GetHalfSize();
 
 };
 

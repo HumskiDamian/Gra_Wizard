@@ -4,7 +4,9 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <iostream>
+#include <fstream>
 #include "Game.h"
+#include "Menu.h"
 
 int main()
 {
@@ -12,10 +14,21 @@ int main()
     float deltaTime;
     Game game;
     sf::Clock deltaClock;
+    /*Menu menu();
+    int result = menu.run();
+    if (result == 0) {
+        return 0; // Zakończenie programu
+    }*/
     while (game.running()) {
         deltaTime = deltaClock.restart().asSeconds();
         game.update(deltaTime);
         game.render();
+        if(game.getEndgame()==true){
+
+            break;
+        }
+
+
     }
 
     return 0;

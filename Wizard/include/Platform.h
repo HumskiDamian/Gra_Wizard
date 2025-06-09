@@ -15,16 +15,19 @@
 class Platform
 {
 private:
-	sf::RectangleShape platform;
+    sf::Texture texture;
+    sf::Sprite platf;
+    sf::RectangleShape platform;
 public:
-	Platform();
-	Platform(sf::Vector2f size, sf::Vector2f pos);
-	~Platform();
-	void Draw(sf::RenderWindow& window);
-	Collider GetCollider();
-	void render(sf::RenderTarget* target);
-	void setSize(sf::Vector2f size);
-	void setPos(sf::Vector2f pos);
+    Platform();
+    Platform(sf::Vector2f size, sf::Vector2f pos);
+    ~Platform();
+    void Draw(sf::RenderWindow& window);
+    Collider GetCollider();
+    void render(sf::RenderTarget* target);
+    void setSize(sf::Vector2f size);
+    void setPos(sf::Vector2f pos);
+    void setColor(int x, int y, int z, int a);
 };
 
 

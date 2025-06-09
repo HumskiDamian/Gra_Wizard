@@ -10,55 +10,72 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <fstream>
 
 #include "Player.h"
 #include "Collider.h"
 #include "Platform.h"
 #include "GameSave.h"
 #include "Goblin.h"
-
+#include "Trap.h"
 class Game
 {
 private:
-	//GameSave saveManager;
+    //GameSave saveManager;
 
 
-	sf::VideoMode videomode;
-	sf::RenderWindow* window;
-	bool endgame;
-	float a, b;
-	bool onGround;
-	float gravity;
+    sf::VideoMode videomode;
+    sf::RenderWindow* window;
+
+    sf::Texture las;
+    sf::Sprite slas;
+
+    sf::Texture texture;
+    sf::RectangleShape ending;
+    bool endgame;
+    float a, b;
+    bool onGround;
+    float gravity;
 
     sf::View view;
+    int x,y;
+    int trapLos;
+    int goblinLos;
+    int platLos;
+
+    sf::Event windowEvent;
+    //sf::RectangleShape floor;
+    Player player;
+    Platform plat;
+    Platform Lwall;
+    std::vector<Trap> traps;
+    std::vector<Goblin> goblins;
+    std::vector<Platform> platforms;
+
+    Goblin goblin;
+    Trap trap;
 
 
-	sf::Event windowEvent;
-	//sf::RectangleShape floor;
-	Player player;
-	Platform plat;
 
-	int points;
+    sf::Vector2i mouse;
+    sf::Text guiText;
+    void initVariables();
+    void initWindow();
 
-
-	sf::Font font;
-	sf::Text guiText;
-	void initVariables();
-	void initWindow();
-
-	sf::Vector2f direction;
+    sf::Vector2f direction;
 
 public:
-	Game();
-	~Game();
-	const bool running() const;
-	void pollEvents();
-	//const int randowizerType();
+    Game();
+    ~Game();
+    const bool running() const;
+    void pollEvents();
 
-	//void spawnSwagBalls();
-	void updateCollision();
-	void update(float dTime);
-	void render();
+
+
+    void updateCollision();
+    void update(float dTime);
+    void render();
+    bool getEndgame();
 
 };
 
