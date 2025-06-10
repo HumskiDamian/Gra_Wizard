@@ -17,7 +17,33 @@
 
 class Magic
 {
+
 protected:
+    float maxDist;
+    float speed;
+    float damage;
+    float time;
+    float mana;
+    float body_size;
+    float incantation;
+    float x;
+    float y;
+    sf::Vector2f pos;
+    sf::RectangleShape body;
+public:
+    Magic(float maxDist,
+    float speed,
+    float damage,
+    float time,
+    float mana,
+    float body_size,
+    float incantation,
+    float x,
+    float y);
+	virtual~Magic();
+	virtual void update(float deltaTime);
+    virtual void render(sf::RenderTarget* target);
+/*protected:
 
 
 	//sf::CircleShape magic;
@@ -25,17 +51,17 @@ protected:
 	float cooldownTimer;
     std::vector<Shot_Magic> activeShots;
 	//magic stats
-	float mana[6];
-	float size[6];
-	float damage[6];
-	float expRange[6];
-	float distanc[6];
-	float time[6];
-	float speed[6];
-	float proficiency[6];
+	float mana[2];
+	float size[2];
+	float damage[2];
+	float expRange[2];
+	float distanc[2];
+	float time[2];
+	float speed[2];
+	float proficiency[2];
 
 //=============================
-	// [types_of_magic fire_ball , water_ball , ice_spear , air_blade , rocks , holy_magic]
+	// [types_of_magic: fire_ball , water_ball]
 //=============================
 	//float actTime;
 	//float dist;
@@ -82,7 +108,7 @@ public:
     float takeReck(sf::RectangleShape& enemy);
 	void updateMagic(float dTime, int* x, int* y);
 	void render(sf::RenderTarget* target);
-	std::vector<Shot_Magic>* getVector();
+	std::vector<Shot_Magic>* getVector();*/
 };
 
 

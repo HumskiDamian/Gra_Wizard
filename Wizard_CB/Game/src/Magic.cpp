@@ -1,6 +1,24 @@
 #include "Magic.h"
 
+    Magic::Magic(float maxDist,
+    float speed,
+    float damage,
+    float time,
+    float mana,
+    float body_size,
+    float incantation,
+    float x,
+    float y){
 
+    }
+	Magic::~Magic(){}
+	void Magic::update(float deltaTime){
+
+	}
+    void Magic::render(sf::RenderTarget* target){
+
+    }
+/*
 Magic::Magic()
 {
 	this->initMagic();
@@ -115,16 +133,16 @@ void Magic::updateMagic(float dTime, int* x, int* y)
            // delete &shot;
             }
 	}
-	/*for (auto it = activeShots.begin(); it != activeShots.end(); ++it) {
+	for (auto it = activeShots.begin(); it != activeShots.end(); ++it) {
     if (it->isMaxDistance()) {
         //activeShots.erase(it);  // erase() zwraca nastêpny iterator
     }
-}*/
-	/*if (this->incantation) {
+}
+	if (this->incantation) {
 		//this->cooldownTimer = time[actMagic];
 		//this->incantation = false;
 	}*/
-	for (int i = 0;i < 6;i++){
+/*	for (int i = 0;i < 6;i++){
         if (this->proficiency[i] != 0) {
 			if (this->time[i] > 0.5f)
 				this->time[i] = 3 - this->proficiency[i] / 5;
@@ -135,7 +153,7 @@ void Magic::updateMagic(float dTime, int* x, int* y)
 	}
 
 	cooldownTimer -= dTime;
-
+*/
 	/*for (auto it = activeShots.begin(); it != activeShots.end();) {
 		it->shape->move(it->direction * it->speed * dTime);
 		it->distanceTraveled += it->speed * dTime;
@@ -148,18 +166,9 @@ void Magic::updateMagic(float dTime, int* x, int* y)
 			++it;
 		}
 	}*/
-	/*activeShots.erase(
-            std::remove_if(
-                activeShots.begin(),
-                activeShots.end(),
-                [](const Shot_Magic& shot) { return shot.shouldBeRemoved(); }
-            ),
-            activeShots.end()
-        );*/
+//}
 
-}
-
-
+/*
 void Magic::render(sf::RenderTarget* target)
 {
 	for (auto& shot : activeShots) {
@@ -177,3 +186,4 @@ float Magic::takeReck(sf::RectangleShape& enemy){
 	}
 
 }
+*/

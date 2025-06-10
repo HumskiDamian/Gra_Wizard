@@ -21,6 +21,9 @@
 class Player
 {
 private:
+
+
+
     //stats
     sf::Font fridays;
     sf::Texture texture;
@@ -76,7 +79,7 @@ private:
 	bool canJump;
 	float jumpHeight;
 
-	Magic magic;
+	//Magic magic;
 
 public:
 	Player(float x = 0.f, float y = 0.f);
@@ -102,6 +105,10 @@ public:
 	float takeRect(sf::RectangleShape& enemy);
 	float getTimer();
     void setVelocity_y(float vel_y);
+
+
+
+
 };
 
 #endif // PLAYER_H

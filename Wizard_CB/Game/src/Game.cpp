@@ -111,7 +111,7 @@ void Game::update(float dTime)
 		player.OnCollision(direction);
 	}*/
 	if (plat.GetCollider().GetBounds().top-(player.getCollider().GetBounds().top+player.getCollider().GetBounds().height)<=0){
-            std::cout<<plat.GetCollider().GetBounds().top-player.getCollider().GetBounds().top+player.getCollider().GetBounds().height-100<<std::endl;
+            //std::cout<<plat.GetCollider().GetBounds().top-player.getCollider().GetBounds().top+player.getCollider().GetBounds().height-100<<std::endl;
         player.setVelocity_y(0.f);
         player.OnCollision(sf::Vector2f(0.f,0.f));
 
@@ -144,10 +144,10 @@ void Game::update(float dTime)
         else {player.setVelocity_y(981.f); std::cout<<"nie"<<std::endl;}
     }*/
 
-
+/*
     for (auto& gob : goblins) {
         gob.takeDamage(player.takeRect(gob.getShape()));
-	}
+	}*/
 
 	if(ending.getGlobalBounds().intersects(player.getShape().getGlobalBounds())){
         endgame=true;

@@ -205,8 +205,8 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
 
 	this->shape.move(velocity * dTime);
 
-	//mouse------------------------------
-
+	//mouse------------------------------===========================================magic-----------------------------------
+/*
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             if(timerMag<=0.f){
             if (this->mana >= this->magic.getMana() && magic.getCanActivMagic()) {
@@ -217,7 +217,7 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
 		//std::cout << "prawy_przycisk---------------------------------" << "\n";
 		timerMag=magic.getTime();
 	}
-	}
+	}*/
 
 
 
@@ -258,7 +258,7 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 	this->levelUp();
 	this->updateWindowBoundsCollision(target);
     //std::cout << *x<< ", "<<*y<< ", "<< "\n";
-	magic.updateMagic(dTime,x,y);
+	//magic.updateMagic(dTime,x,y);
 	if(this->mana<this->manaMax){
         this->mana+=dTime;
 	}
@@ -276,7 +276,7 @@ void Player::render(sf::RenderTarget* target, sf::View* view)
 {
 
 	target->draw(this->shape);
-	magic.render(target);
+	//magic.render(target);
 	target->setView(target->getDefaultView());
     target->draw(hpStatL);
 	target->draw(hpStat);
@@ -334,14 +334,15 @@ Collider Player::getCollider()
 bool Player::getApraisal(){
     return apraisal;
 }
+/*
 Magic* Player::magick(){
     return &magic;
 
-}
-
+}*/
+/*
 float Player::takeRect(sf::RectangleShape& enemy){
     return magic.takeReck(enemy);
-}
+}*/
 float Player::getTimer(){
 return TimerT;
 }
@@ -354,3 +355,5 @@ return TimerT;
 void Player::setVelocity_y(float vel_y){
     gravity=vel_y;
 }
+
+

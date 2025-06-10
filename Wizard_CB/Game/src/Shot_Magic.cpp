@@ -1,5 +1,12 @@
 #include "Shot_Magic.h"
 
+Shot_Magic::Shot_Magic(float maxDist,float speed,float damage,float time,float mana,float body_size,float incantation,float x,float y){
+
+    }
+    Shot_Magic::~Shot_Magic(){}
+
+
+/*
 Shot_Magic::Shot_Magic(sf::Vector2f pos,float speed, float dis, const sf::RenderTarget* target, int x, int y)
 {
         dis=0.f;
@@ -45,12 +52,16 @@ bool Shot_Magic:: isMaxDistance(){
 float Shot_Magic:: getDamage(){
     return this->damage;
 }
-/*sf::RectangleShape Shot_Magic::getShape(){
+sf::RectangleShape Shot_Magic::getShape(){
 return shape;
-}*/
+}
 sf::CircleShape& Shot_Magic::getShape(){
 return shape;
 }
 bool Shot_Magic:: shouldBeRemoved() const {
         return dis > maxDistance;
     }
+
+sf::CircleShape Shot_Magic::getShape(){
+    return shape;
+}*/

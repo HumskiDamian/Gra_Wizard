@@ -11,10 +11,28 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#include "Collider.h"
+//#include "Collider.h"
+#include "Magic.h"
 
-class Shot_Magic
-{
+class Shot_Magic{
+
+public:
+    Shot_Magic(float maxDist,
+    float speed,
+    float damage,
+    float time,
+    float mana,
+    float body_size,
+    float incantation,
+    float x,
+    float y);
+    ~Shot_Magic();
+};
+
+
+
+
+    /*
 private:
     //odwo³¹nia do tej klasy w innych klasach-----------------------------------------------------
     sf::CircleShape shape;
@@ -35,9 +53,10 @@ public:
     bool isMaxDistance();
     float getDamage();
     //sf::RectangleShape getShape();
-    sf::CircleShape& getShape();
+    sf::CircleShape getShape();
     bool shouldBeRemoved()const;
+*/
 
-};
+
 
 #endif // SHOT_MAGIC_H
