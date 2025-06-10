@@ -17,7 +17,7 @@ Shot_Magic::Shot_Magic(sf::Vector2f pos,float speed, float dis, const sf::Render
 
         this->direction=dir;
         this->speed=speed*5;
-        this->maxDistance=dis;
+        this->maxDistance=100.f;
         //std::cout<<"Shot_Magic:: start"<<"\n";
     //ctor
 }
@@ -51,3 +51,6 @@ return shape;
 sf::CircleShape& Shot_Magic::getShape(){
 return shape;
 }
+bool Shot_Magic:: shouldBeRemoved() const {
+        return dis > maxDistance;
+    }

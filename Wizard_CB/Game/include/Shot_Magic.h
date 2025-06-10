@@ -36,7 +36,8 @@ public:
     float getDamage();
     //sf::RectangleShape getShape();
     sf::CircleShape& getShape();
-protected:
+    bool shouldBeRemoved()const;
+
 };
 
 #endif // SHOT_MAGIC_H

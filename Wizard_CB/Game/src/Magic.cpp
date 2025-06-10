@@ -111,7 +111,15 @@ void Magic::updateMagic(float dTime, int* x, int* y)
         timerMag-=dTime;
     for (auto& shot : activeShots) {
 		shot.update(dTime);
+		if(shot.isMaxDistance()){
+           // delete &shot;
+            }
 	}
+	/*for (auto it = activeShots.begin(); it != activeShots.end(); ++it) {
+    if (it->isMaxDistance()) {
+        //activeShots.erase(it);  // erase() zwraca nastêpny iterator
+    }
+}*/
 	/*if (this->incantation) {
 		//this->cooldownTimer = time[actMagic];
 		//this->incantation = false;
@@ -140,6 +148,15 @@ void Magic::updateMagic(float dTime, int* x, int* y)
 			++it;
 		}
 	}*/
+	/*activeShots.erase(
+            std::remove_if(
+                activeShots.begin(),
+                activeShots.end(),
+                [](const Shot_Magic& shot) { return shot.shouldBeRemoved(); }
+            ),
+            activeShots.end()
+        );*/
+
 }
 
 

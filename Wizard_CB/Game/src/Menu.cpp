@@ -23,6 +23,7 @@ Menu::Menu() {
     exitText.setFillColor(sf::Color::White);
     exitText.setPosition(300, 300);
 }
+Menu::~Menu(){}
 
 int Menu::run() {
     while (window->isOpen()) {
