@@ -8,6 +8,7 @@ Menu::Menu() {
     if (!font.loadFromFile("Fonts/CalligraphyFLF.ttf")) {
         throw "Brak czcionki!";
     }
+    krok=0;
 
     // Konfiguracja przycisku START
     startText.setFont(font);
@@ -22,6 +23,26 @@ Menu::Menu() {
     exitText.setCharacterSize(50);
     exitText.setFillColor(sf::Color::White);
     exitText.setPosition(300, 300);
+    //poziom trudności
+    dif.setFont(font);
+    dif.setString("difficulty:");
+    dif.setCharacterSize(50);
+    dif.setFillColor(sf::Color::White);
+    dif.setPosition(300, 100);
+
+
+    easy.setFont(font);
+    easy.setString("EASY");
+    easy.setCharacterSize(50);
+    easy.setFillColor(sf::Color::White);
+    easy.setPosition(300, 200);
+
+    // Konfiguracja przycisku EXIT
+    hard.setFont(font);
+    hard.setString("Hard");
+    hard.setCharacterSize(50);
+    hard.setFillColor(sf::Color::Red);
+    hard.setPosition(300, 300);
 }
 Menu::~Menu(){}
 
@@ -34,20 +55,36 @@ int Menu::run() {
 
             if (event.type == sf::Event::MouseButtonPressed) {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+                if(krok!=0){
+                    if (easy.getGlobalBounds().contains(mousePos.x, mousePos.y))
+                    return 1;
 
-                if (startText.getGlobalBounds().contains(mousePos.x, mousePos.y))
-                    return 1; // Start gry
+                if (hard.getGlobalBounds().contains(mousePos.x, mousePos.y))
+                    return 2;
+                }
+                if(krok==0){
+                    if (startText.getGlobalBounds().contains(mousePos.x, mousePos.y))
+                    krok=1;
 
-                if (exitText.getGlobalBounds().contains(mousePos.x, mousePos.y))
+                    if (exitText.getGlobalBounds().contains(mousePos.x, mousePos.y))
                     return 0; // Zamkniêcie gry
+                }
+                sf::sleep(sf::seconds(0.5));
             }
         }
 
         window->clear(sf::Color::Black);
-        window->draw(startText);
-        window->draw(exitText);
+        if(krok==0){
+            window->draw(startText);
+            window->draw(exitText);
+        }
+        if(krok!=0){
+            window->draw(dif);
+            window->draw(easy);
+            window->draw(hard);
+        }
         window->display();
     }
 
-    return 0; // Domyœlnie zamyka program
+    return 0; // Domyslnie zamyka program
 }

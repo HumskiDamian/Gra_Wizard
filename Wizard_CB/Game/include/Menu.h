@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include <string>
 #include <sstream>
 
@@ -11,6 +12,10 @@ class Menu
     sf::Font font;
     sf::Text startText;
     sf::Text exitText;
+    sf::Text dif;
+    sf::Text easy;
+    sf::Text hard;
+    int krok;
 
 public:
     Menu();

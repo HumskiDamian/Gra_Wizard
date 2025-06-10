@@ -47,7 +47,7 @@ public:
     virtual void takeDamage(float d);
     virtual void setPos(int d);
     sf::RectangleShape& getShape();
-
+    virtual void setDmg_hp(int dif);
     bool isDead() const;
     Collider GetCollider();
 };

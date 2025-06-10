@@ -60,13 +60,13 @@ private:
 
     sf::Vector2i mouse;
 	sf::Text guiText;
-	void initVariables();
+	void initVariables(int dif);
 	void initWindow();
 
 	sf::Vector2f direction;
 
 public:
-	Game();
+	Game(int dif);
 	~Game();
 	const bool running() const;
 	void pollEvents();

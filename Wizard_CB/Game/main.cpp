@@ -18,7 +18,7 @@ int main()
     }
 
     float deltaTime;
-    Game game;
+    Game game(result);
     sf::Clock deltaClock;
     /*Menu menu();
     int result = menu.run();

@@ -3,14 +3,14 @@
 
 
 
-void Game::initVariables()
+void Game::initVariables(int dif)
 {
 	this->a = 1600;
 	this->b = 900;
 	this->gravity = 50;
 	this->endgame = false;
 	this->plat.setSize(sf::Vector2f(this->a*30, this->b / 3));
-	this->plat.setPos(sf::Vector2f(this->a*30 / 2.f, 680));
+	this->plat.setPos(sf::Vector2f(this->a*30 / 2.f-800, 680));
 	this->Lwall.setSize(sf::Vector2f(10, 1100));
 	this->Lwall.setPos(sf::Vector2f(0, 0));
 	this->Lwall.setColor(0,0,0,0);
@@ -24,7 +24,7 @@ void Game::initVariables()
     for(int i=1;i<=trapLos;i++){
         traps.emplace_back();
     }
-    ///player.setVelocity_y(981.f);
+    //player.setVelocity_y(981.f);
     int dLos=1000;
     for (auto& tr : traps) {
         dLos+=(rand()%1500+200);
@@ -38,6 +38,7 @@ void Game::initVariables()
     for (auto& gob : goblins) {
         dLos+=(rand()%1500);
 		gob.setPos(dLos);
+		gob.setDmg_hp(dif);
 	}
 	platLos = (rand()%100)+1;
     for(int i=1;i<=platLos;i++){
@@ -46,7 +47,7 @@ void Game::initVariables()
     int xLos=500;
     int yLos=200;
     for (auto& plat : platforms) {
-        xLos+=((rand()%1000)+200);
+        xLos+=((rand()%1000)+2000);
         plat.setSize(sf::Vector2f(300,50));
 		plat.setPos(sf::Vector2f(xLos,yLos+(rand()%200)));
 	}
@@ -65,8 +66,8 @@ void Game::initWindow()
 }
 
 //konstruktor i destruktor
-Game::Game() {
-	this->initVariables();
+Game::Game(int dif) {
+	this->initVariables(dif);
 	this->initWindow();
 
 }
@@ -120,7 +121,7 @@ void Game::update(float dTime)
     else player.setVelocity_y(981.f);
 
 	if (Lwall.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
-		player.OnCollision(direction);
+		player.OnCollision(sf::Vector2f(0.f,1.f));
 	}
 	for (auto& plat : platforms) {
         if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {

@@ -13,7 +13,7 @@ void Enemy::update(float deltaTime, Player& player) {
         if (isPlayerInRange(player, attackRadius)) {
             if(attackTimer<=0){
                 attack(const_cast<Player&>(player));
-                attackTimer=2;
+                attackTimer=1;
             }
         }
         else {
@@ -80,4 +80,8 @@ sf::RectangleShape& Enemy::getShape()
 Collider Enemy::GetCollider()
 {
 	return Collider(this->body);
+}
+void Enemy::setDmg_hp(int dif){
+    damage*=dif;
+    health*=dif;
 }

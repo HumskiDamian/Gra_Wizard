@@ -2098,7 +2098,7 @@
 1748329124 source:c:\users\damia\onedrive\desktop\game\game\src\player.cpp
 	"Player.h"
 
-1749575689 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\main.cpp
+1749582580 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
 	<SFML/Window.hpp>
@@ -2697,7 +2697,7 @@
 	<SFML/Network/IpAddress.hpp>
 	<vector>
 
-1749550879 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\game.h
+1749582678 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\game.h
 	<iostream>
 	<vector>
 	<ctime>
@@ -2762,10 +2762,10 @@
 
 1748518891 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\gamesave.h
 
-1749502342 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\goblin.h
+1749582678 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\goblin.h
 	"Enemy.h"
 
-1749502342 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\enemy.h
+1749582952 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\enemy.h
 	<iostream>
 	<vector>
 	<ctime>
@@ -2782,16 +2782,16 @@
 1749559122 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\collider.cpp
 	"Collider.h"
 
-1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\enemy.cpp
+1749582952 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\enemy.cpp
 	"Enemy.h"
 
-1749559630 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\game.cpp
+1749583019 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\game.cpp
 	"Game.h"
 
 1748518891 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\gamesave.cpp
 	"GameSave.h"
 
-1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\goblin.cpp
+1749583092 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\goblin.cpp
 	"Goblin.h"
 
 1749575443 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\magic.cpp
@@ -2800,7 +2800,7 @@
 1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\platform.cpp
 	"Platform.h"
 
-1749559122 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\player.cpp
+1749582080 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\player.cpp
 	"Player.h"
 
 1749575001 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\shot_magic.h
@@ -2823,12 +2823,13 @@
 	<SFML/Graphics.hpp>
 	"Player.h"
 
-1749502796 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\menu.h
+1749579670 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\menu.h
 	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
 	<string>
 	<sstream>
 
-1749575811 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\menu.cpp
+1749579829 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\menu.cpp
 	"Menu.h"
 
 1749575279 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\shot_magic.cpp

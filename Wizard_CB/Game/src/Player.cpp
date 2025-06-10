@@ -34,10 +34,10 @@ void Player::initVariables()
     manaText.setColor(sf::Color(255,255,255));
     manaText.setCharacterSize(24);
     manaText.setPosition(40,40);
-    Timer.setFont(fridays);
+    /*Timer.setFont(fridays);
 	Timer.setColor(sf::Color(255,255,255));
     Timer.setCharacterSize(24);
-    Timer.setPosition(800,10);
+    Timer.setPosition(800,10);*/
 
 	this->movementSpeed = 500.f;
 	this->hpMax = 100;
@@ -248,7 +248,7 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 
         hpText.setString(sshp.str());
         manaText.setString(ssmana.str());
-        Timer.setString(sstime.str());
+        //Timer.setString(sstime.str());
         hpStat.setScale(sf::Vector2f(hp/hpMax,1));
         manaStat.setScale(sf::Vector2f(mana/manaMax,1));
     }
