@@ -23,7 +23,7 @@ bool Collider::CheckCollider(Collider other, sf::Vector2f& direction, float push
 	sf::Vector2f otherHalfSize = other.GetHalfSize();
 	sf::Vector2f thisPosition = GetPosition();
 	sf::Vector2f thisHalfSize = GetHalfSize();
-    std::cout<<otherPosition.x<<"............"<<otherPosition.y<<std::endl;
+   /// std::cout<<otherPosition.x<<"............"<<otherPosition.y<<std::endl;
 	float deltaX = otherPosition.x - thisPosition.x;
 	float deltaY = otherPosition.y - thisPosition.y;
 
@@ -72,6 +72,17 @@ bool Collider::CheckCollider(Collider other, sf::Vector2f& direction, float push
 
 }
 
+bool Collider::CheckCollider(Collider other)
+{
+
+	sf::FloatRect otherBounds = other.GetBounds();
+    sf::FloatRect thisBounds = GetBounds();
+
+    if(thisBounds.top-(otherBounds.top+otherBounds.height)<=0){
+        return true;
+    }
+    else return false;
+}
 sf::Vector2f Collider::GetPosition()
 {
 	return this->body.getPosition();
@@ -80,6 +91,10 @@ sf::Vector2f Collider::GetPosition()
 sf::Vector2f Collider::GetHalfSize()
 {
 	return this->body.getSize() / 2.f;
+}
+sf::FloatRect Collider:: GetBounds()
+{
+    return this->body.getGlobalBounds();
 }
 
 

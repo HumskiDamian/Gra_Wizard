@@ -14,8 +14,10 @@ public:
 	~Collider();
 	void Move(float dx, float dy);
 	bool CheckCollider(Collider other, sf::Vector2f& direction, float push);
+	bool CheckCollider(Collider other);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetHalfSize();
+	sf::FloatRect GetBounds();
 
 };
 

@@ -14,6 +14,7 @@
 
 #include "Player.h"
 #include "Collider.h"
+#include "Collider_Platform.h"
 #include "Platform.h"
 #include "GameSave.h"
 #include "Goblin.h"

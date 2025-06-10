@@ -24,6 +24,7 @@ void Game::initVariables()
     for(int i=1;i<=trapLos;i++){
         traps.emplace_back();
     }
+    ///player.setVelocity_y(981.f);
     int dLos=1000;
     for (auto& tr : traps) {
         dLos+=(rand()%1500+200);
@@ -105,25 +106,42 @@ void Game::update(float dTime)
 
     //std::cout << sf::Mouse::getPosition(*window).x<< ", "<<sf::Mouse::getPosition(*window).y<< ", "<<window->getPosition().x<< "\n";//-------------------------------------------------
 
-	if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
+	/*if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
 		player.OnCollision(direction);
+	}*/
+	if (plat.GetCollider().GetBounds().top-(player.getCollider().GetBounds().top+player.getCollider().GetBounds().height)<=0){
+            std::cout<<plat.GetCollider().GetBounds().top-player.getCollider().GetBounds().top+player.getCollider().GetBounds().height-100<<std::endl;
+        player.setVelocity_y(0.f);
+        player.OnCollision(sf::Vector2f(0.f,0.f));
+
+
 	}
+
+    else player.setVelocity_y(981.f);
+
 	if (Lwall.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
 		player.OnCollision(direction);
 	}
 	for (auto& plat : platforms) {
         if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
-        //player.setVelocity_y(0.f);
+            //player.setVelocity_y(0.f);
 		player.OnCollision(direction);
 	}
-	/*else
-        player.setVelocity_y(981.f);*/
+	//else
+        //player.setVelocity_y(981.f);
 	}
 	for (auto& gob : goblins) {
         if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f)) {
 		player.OnCollision(direction);
 	}
 	}
+        ///=======================================================================================================
+    /*for (auto& plat : platforms) {
+        if(plat.GetCollider().GetBounds().top-(player.getCollider().GetBounds().top+player.getCollider().GetBounds().height)<=0){
+            std::cout<<"tak"<<std::endl;
+            player.setVelocity_y(0.f);}
+        else {player.setVelocity_y(981.f); std::cout<<"nie"<<std::endl;}
+    }*/
 
 
     for (auto& gob : goblins) {

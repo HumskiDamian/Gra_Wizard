@@ -10,6 +10,7 @@ Collider_Platform::Collider_Platform(sf::RectangleShape& body) :
 Collider_Platform::~Collider_Platform()
 {
     //dtor
+
 }
 
 bool Collider_Platform::CheckCollider(Collider_Platform other)

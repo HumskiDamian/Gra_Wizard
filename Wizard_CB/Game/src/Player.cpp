@@ -269,7 +269,7 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 
     //fonts and text
 
-
+       /// std::cout<<velocity.x<<"----------"<<velocity.y<<std::endl;
 }
 
 void Player::render(sf::RenderTarget* target, sf::View* view)
@@ -330,6 +330,7 @@ Collider Player::getCollider()
 {
 	return Collider(this->shape);
 }
+
 bool Player::getApraisal(){
     return apraisal;
 }
