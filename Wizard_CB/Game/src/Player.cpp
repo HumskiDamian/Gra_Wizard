@@ -2,6 +2,8 @@
 
 void Player::initVariables()
 {
+    gravity=981.f;
+    onGround=false;
     timerMag=0.f;
     hpTimer=0.f;
     TimerT=0.f;
@@ -192,11 +194,14 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->canJump) {
 		this->canJump = false;
+		gravity=981.f;
 		this->velocity.y -= sqrt(2.f * 981.f * jumpHeight);
+		this->onGround=false;
 
 	}
 	//std::cout << canJump << "\n";
-	this->velocity.y += 981.f * dTime;
+	//if(canJump==false)
+    this->velocity.y += gravity * dTime;
 
 	this->shape.move(velocity * dTime);
 
@@ -304,13 +309,20 @@ void Player::OnCollision(sf::Vector2f direction)
 	else if (direction.x > 0.f) {
 		//collision on right
 		this->velocity.x = 0.f;
+
 	}
+	//gravity=981.f;
 	if (direction.y <= 0.f) {
 		this->velocity.y = 0.f;
+		//gravity=0.f;
 		this->canJump = true;
+		//this->onGround=false;
 	}
 	else if (direction.y > 0.f) {
 		this->velocity.y = 0.f;
+		//gravity=981.f;
+		//this->onGround=false;
+
 	}
 }
 
@@ -331,4 +343,13 @@ float Player::takeRect(sf::RectangleShape& enemy){
 }
 float Player::getTimer(){
 return TimerT;
+}
+
+/*void Player::setGravity(bool g){
+    if(g) onGround=true;
+    else onGround=false;
+}*/
+
+void Player::setVelocity_y(float vel_y){
+    gravity=vel_y;
 }

@@ -2715,7 +2715,7 @@
 	"Goblin.h"
 	"Trap.h"
 
-1749502342 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\player.h
+1749542496 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\player.h
 	<iostream>
 	<vector>
 	<ctime>
@@ -2747,7 +2747,7 @@
 	"Collider.h"
 	"Shot_Magic.h"
 
-1749502342 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\platform.h
+1749542496 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\platform.h
 	<iostream>
 	<vector>
 	<ctime>
@@ -2778,13 +2778,13 @@
 	"Player.h"
 	<cmath>
 
-1749506117 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\collider.cpp
+1749506990 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\collider.cpp
 	"Collider.h"
 
 1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\enemy.cpp
 	"Enemy.h"
 
-1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\game.cpp
+1749543400 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\game.cpp
 	"Game.h"
 
 1748518891 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\gamesave.cpp
@@ -2799,7 +2799,7 @@
 1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\platform.cpp
 	"Platform.h"
 
-1749502342 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\player.cpp
+1749542634 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\player.cpp
 	"Player.h"
 
 1749502796 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\shot_magic.h
@@ -2835,4 +2835,11 @@
 
 1749502796 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\trap.cpp
 	"Trap.h"
+
+1749537375 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\collider_platform.cpp
+	"Collider_Platform.h"
+
+1749537254 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\collider_platform.h
+	<SFML/Graphics.hpp>
+	<iostream>
 

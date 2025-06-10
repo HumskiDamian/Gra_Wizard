@@ -50,7 +50,9 @@ private:
 
 	//check delete
 	bool canMove;
+	bool onGround;
 	float movementSpeed;
+	float gravity;
 
 	//inicjalizacja
 	void initVariables();
@@ -91,6 +93,7 @@ public:
 	void update(const sf::RenderTarget* target, float dTime, int* x, int* y);
 	void render(sf::RenderTarget* target, sf::View* view);
 	void levelUp();
+	//void setGravity(bool g);
     sf::Vector2f GetPosition(){return shape.getPosition();}
 	void OnCollision(sf::Vector2f direction);
 	Collider getCollider();
@@ -98,7 +101,7 @@ public:
 	Magic* magick();
 	float takeRect(sf::RectangleShape& enemy);
 	float getTimer();
-
+    void setVelocity_y(float vel_y);
 };
 
 #endif // PLAYER_H

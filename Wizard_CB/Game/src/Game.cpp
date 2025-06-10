@@ -113,8 +113,11 @@ void Game::update(float dTime)
 	}
 	for (auto& plat : platforms) {
         if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
+        //player.setVelocity_y(0.f);
 		player.OnCollision(direction);
 	}
+	/*else
+        player.setVelocity_y(981.f);*/
 	}
 	for (auto& gob : goblins) {
         if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f)) {

@@ -28,6 +28,7 @@ public:
 	void setSize(sf::Vector2f size);
 	void setPos(sf::Vector2f pos);
 	void setColor(int x, int y, int z, int a);
+
 };
 
 
