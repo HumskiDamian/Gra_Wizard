@@ -34,23 +34,25 @@ protected:
     sf::Vector2f pos;
     sf::Vector2f direction;
     sf::CircleShape body;
+    int typ;
 public:
     Magic();
-    void setMagic(float maxDist,
-    float speed,
-    float damage,
-    float time,
-    float mana,
-    float body_size,
-    float incantation,
-    sf::Vector2f pos,
-    int tar_x,
-    int tar_y,
-    int typ, const sf::RenderTarget* target);
+    void setMagic(float _maxDist,
+    float _speed,
+    float _damage,
+    float _time,
+    float _mana,
+    float _body_size,
+    float _incantation,
+    sf::Vector2f _pos,
+    int _tar_x,
+    int _tar_y,
+    int _typ, const sf::RenderTarget* target);
 	~Magic();
 	void update(float deltaTime);
     void render(sf::RenderTarget* target);
     float getDmg();
+    sf::CircleShape getShape();
     bool isDist();
 /*protected:
 

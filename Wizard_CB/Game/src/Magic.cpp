@@ -1,25 +1,28 @@
 #include "Magic.h"
 
     Magic::Magic(){}
-    void Magic::setMagic(float maxDist,
-    float speed,
-    float damage,
-    float time,
-    float mana,
-    float body_size,
-    float incantation,
-    sf::Vector2f pos,
-    int tar_x,
-    int tar_y,
-    int typ, const sf::RenderTarget* target){
-        maxDist=maxDist;
-        speed=speed;
-        damage=damage;
-        mana=mana;
-        body_size=body_size;
-        pos=sf::Vector2f(pos.x,pos.y-30);
-        tar_x=tar_x;
-        tar_y=tar_y;
+    void Magic::setMagic(float _maxDist,
+    float _speed,
+    float _damage,
+    float _time,
+    float _mana,
+    float _body_size,
+    float _incantation,
+    sf::Vector2f _pos,
+    int _tar_x,
+    int _tar_y,
+    int _typ, const sf::RenderTarget* target){
+        maxDist=_maxDist;
+        speed=_speed;
+        damage=_damage;
+        mana=_mana;
+        body_size=_body_size;
+        pos=sf::Vector2f(_pos.x,_pos.y-30);
+        tar_x=_tar_x;
+        tar_y=_tar_y;
+        typ=_typ;
+        //std::cout<<tar_x<<"===="<<tar_y<<std::endl;
+        //std::cout<<pos.x<<"----"<<pos.y<<std::endl;
         dis=0;
         body.setRadius(body_size);
         if(typ==1)
@@ -30,18 +33,28 @@
 
         sf::Vector2f dir;
         sf::Vector2u windowSize=target->getSize();
-        dir.x=tar_x-(windowSize.x/2);
-        dir.y=tar_y-(windowSize.y/2);
+        //std::cout<<speed<<std::endl;
+        //std::cout<<tar_x<<"----"<<tar_y<<std::endl;
+        //std::cout<<pos.x<<"++++"<<pos.y<<std::endl;
+        dir.x=tar_x-(1600/2);
+        dir.y=tar_y-(900/2);
+        while(abs(dir.x)<1||abs(dir.y)<1){
+            dir.x/=2;
+            dir.y/=2;
+        }
         //std::cout<<x<<","<<y<<"\n";
-        dir.x/=sqrt(dir.x*dir.x+dir.y*dir.y);
-        dir.y/=sqrt(pow(x-800,2)+pow(y-450,2));
+        //dir.x/=sqrt(dir.x*dir.x+dir.y*dir.y);
+        //dir.y/=sqrt(dir.x*dir.x+dir.y*dir.y);
+        /*float length = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+        direction = sf::Vector2f(dir.x / length, dir.y / length);*/
         direction=dir;
 
     }
 	Magic::~Magic(){}
 	void Magic::update(float deltaTime){
         dis+=sqrt(direction.x*direction.x+direction.y*direction.y)*speed*deltaTime;
-        this->body.move(direction*speed*deltaTime);
+        //std::cout<<direction.x*speed<<"===="<<direction.y*speed<<std::endl;
+        body.move(direction*speed*deltaTime);
 	}
     void Magic::render(sf::RenderTarget* target){
         target->draw(this->body);
@@ -51,6 +64,9 @@
     }
     bool Magic::isDist(){
         return (maxDist<dis);
+    }
+    sf::CircleShape Magic::getShape(){
+        return body;
     }
 /*
 Magic::Magic()

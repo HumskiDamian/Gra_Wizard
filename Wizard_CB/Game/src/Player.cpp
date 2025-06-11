@@ -264,7 +264,7 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
     //std::cout << *x<< ", "<<*y<< ", "<< "\n";
 	//magic.updateMagic(dTime,x,y);
 	if(this->mana<this->manaMax){
-        this->mana+=dTime;
+        this->mana+=5*dTime;
 	}
 	if(this->hp<this->hpMax){
         this->hp+=dTime/10;
@@ -367,4 +367,10 @@ void Player::setMana(float m){
 }
 float Player::getMana(){
     return this->mana;
+}
+void Player::setmHp(float h){
+    hpMax+=h;
+}
+void Player::setmMan(float q){
+    manaMax+=q;
 }

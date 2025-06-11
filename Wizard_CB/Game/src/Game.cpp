@@ -40,9 +40,10 @@ void Game::initVariables(int dif)
 		gob.setPos(dLos);
 		gob.setDmg_hp(dif);
 	}
-	platLos = (rand()%100)+1;
+	platLos = (rand()%10)+1;
     for(int i=1;i<=platLos;i++){
         platforms.emplace_back();
+        bonus.emplace_back();
     }
     int xLos=500;
     int yLos=200;
@@ -51,6 +52,21 @@ void Game::initVariables(int dif)
         plat.setSize(sf::Vector2f(300,50));
 		plat.setPos(sf::Vector2f(xLos,yLos+(rand()%200)));
 	}
+
+	for (auto& bon : bonus) {
+	    int k;
+	    float losb=500;
+	float r=(rand()%3+1.f);
+	if(r<=1||r>3)
+        k=3;
+    else if(r<=2)
+        k=2;
+    else if(r<=3)
+        k=1;
+        losb+=rand()%100*100;
+        bon.setBonus(rand()%40+10,sf::Vector2f(losb,rand()%150+300),k);
+	}
+
     view.setCenter(sf::Vector2f(0.f,0.f));
     view.setSize(sf::Vector2f(a,b));
 
@@ -101,12 +117,13 @@ void Game::pollEvents()
 		}
 		///********************************************************************************************
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+
             if(player.getMana()>=(10/proficiency) && mag_t<=0 ){
                 player.setMana(10/proficiency);
                 mag_t=1.5;
                 magic.emplace_back();
                 if(typ==1)
-                    magic.back().setMagic(1000.f/proficiency,200.f*proficiency,100.f*(proficiency+0.5),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
+                    magic.back().setMagic(800.f*proficiency,2.f*proficiency,100.f*(proficiency+0.5),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
                 if(typ!=1)
                     /*float maxDist,
     float speed,
@@ -119,8 +136,8 @@ void Game::pollEvents()
     float tar_x,
     float tar_y,
     int typ, const sf::RenderTarget* target*/
-                   magic.back().setMagic(1000.f*proficiency,200.f*proficiency,100.f*(proficiency-0.1),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
-                proficiency+=0.01;
+                   magic.back().setMagic(1000.f*proficiency,2.f*proficiency,100.f*(proficiency-0.1),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
+                proficiency+=0.05;
             }
 		}
 	}
@@ -133,6 +150,7 @@ void Game::updateCollision()
 
 void Game::update(float dTime)
 {
+    //std::cout<<sf::Mouse::getPosition(*window).x<<"===="<<sf::Mouse::getPosition(*window).y<<std::endl;
 
 	this->pollEvents();
 
@@ -167,6 +185,32 @@ void Game::update(float dTime)
         if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f))
 		player.OnCollision(direction);
 	}
+	for (auto& gob : goblins) {
+        for (auto mag = magic.begin(); mag != magic.end(); ) {
+            if (mag->getShape().getGlobalBounds().intersects(gob.getShape().getGlobalBounds())) {
+                gob.takeDamage(mag->getDmg());
+                mag = magic.erase(mag);
+            }
+            else ++mag;
+        }
+	}
+	for (auto mag = magic.begin(); mag != magic.end(); ) {
+        if (mag->getShape().getGlobalBounds().intersects(plat.getShape().getGlobalBounds())) {
+                mag = magic.erase(mag);
+            }
+            else ++mag;
+	}
+
+
+
+	for (auto& plat : platforms) {
+        for (auto mag = magic.begin(); mag != magic.end(); ) {
+            if (mag->getShape().getGlobalBounds().intersects(plat.getShape().getGlobalBounds())) {
+                mag = magic.erase(mag);
+            }
+            else ++mag;
+        }
+	}
 	///******************************************************************************************************************?
 	 /*for (auto gob = goblins.begin(); gob != goblins.end(); ++gob){
         for (auto gob1 = goblins.begin(); gob1 != goblins.end(); ++gob1)
@@ -178,9 +222,8 @@ void Game::update(float dTime)
             }
         }
 	 }*/
-	for (auto& mag : magic) {
-		mag.update(dTime);
-	}
+
+
 
         ///=======================================================================================================
     /*for (auto& plat : platforms) {
@@ -210,7 +253,7 @@ void Game::update(float dTime)
     this->y=sf::Mouse::getPosition(*window).y-150;
     //std::cout << this->x<< ", "<<this->y<< ", "<< "\n";
 	this->player.update(this->window, dTime, &this->x, &this->y);
-    this->goblin.update(dTime, player);
+    //this->goblin.update(dTime, player);
     for (auto& gob : goblins) {
 		gob.update(dTime, player);
 	}
@@ -219,6 +262,28 @@ void Game::update(float dTime)
     for (auto& tr : traps) {
 		tr.update(&player);
 		tr.setApraisal(player.getApraisal());
+	}
+    for(auto& bon:bonus){
+        bon.visible(player.getApraisal());
+    }
+	for (auto& mag : magic) {
+		mag.update(dTime);
+	}
+	for (auto bon = bonus.begin(); bon != bonus.end(); ) {
+        bon->update(dTime);
+		if(bon->getShape().getGlobalBounds().intersects(player.getShape().getGlobalBounds())&&sf::Keyboard::isKeyPressed(sf::Keyboard::F)){
+            if(bon->getTyp()==1) player.setmHp(bon->getPoint());
+            if(bon->getTyp()==2) player.setmMan(bon->getPoint());
+            if(bon->getTyp()==3) player.takeDamage(bon->getPoint());
+            bon = bonus.erase(bon);
+		}
+		else ++bon;
+
+	}
+	for (auto gob = goblins.begin(); gob != goblins.end(); ) {
+        if(gob->isDead()==true)
+            gob=goblins.erase(gob);
+        else ++gob;
 	}
 }
 
@@ -237,13 +302,16 @@ void Game::render()
 	this->plat.render(this->window);
 	this->Lwall.render(this->window);
 	this->player.render(this->window,&view);
-	this->goblin.render(this->window);
+	//this->goblin.render(this->window);
 	window->draw(ending);
     for (auto& gob : goblins) {
 		gob.render(this->window);
 	}
 	for (auto& mag : magic) {
 		mag.render(this->window);
+	}
+	for (auto& bon : bonus) {
+		bon.render(this->window);
 	}
 	this->window->display();
 }

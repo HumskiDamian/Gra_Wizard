@@ -11,6 +11,7 @@ Enemy::Enemy(float x, float y, float width, float height, float health, float da
 Enemy::~Enemy() {}
 
 void Enemy::update(float deltaTime, Player& player) {
+    if(!(health<=0)){
     if (isPlayerInRange(player, detectionRadius)) {
         if (isPlayerInRange(player, attackRadius)) {
             if(attackTimer<=0){
@@ -28,6 +29,7 @@ void Enemy::update(float deltaTime, Player& player) {
     if(body.getPosition().y<=500)
     body.move(sf::Vector2f(0.f,981/2*deltaTime));
     //gravity
+    }
 }
 //render
 void Enemy::render(sf::RenderTarget* target) {
@@ -35,10 +37,14 @@ void Enemy::render(sf::RenderTarget* target) {
 }
 
 bool Enemy::isPlayerInRange(const Player& player, float range) const {
-    sf::Vector2f playerPos = player.getShape().getPosition();
+    if(!(health<=0)){
+        sf::Vector2f playerPos = player.getShape().getPosition();
     sf::Vector2f enemyPos = body.getPosition();
     float distance = sqrt(pow(playerPos.x - enemyPos.x, 2) + pow(playerPos.y - enemyPos.y, 2));
     return distance <= range;
+
+    }
+
 }
 
 void Enemy::moveToPlayer(const Player& player, float deltaTime) {

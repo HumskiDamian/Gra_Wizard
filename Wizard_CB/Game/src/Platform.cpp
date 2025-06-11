@@ -52,3 +52,7 @@ void Platform::setPos(sf::Vector2f pos)
 void Platform::setColor(int x, int y, int z, int a){
     this->platform.setFillColor(sf::Color(x,y,z,a));
 }
+
+sf::RectangleShape Platform::getShape(){
+    return platform;
+}

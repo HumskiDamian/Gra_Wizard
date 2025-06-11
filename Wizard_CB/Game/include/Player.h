@@ -109,7 +109,8 @@ public:
     void setVelocity_y(float vel_y);
     void setMana(float m);
     float getMana();
-
+    void setmHp(float h);
+    void setmMan(float m);
 
 
 

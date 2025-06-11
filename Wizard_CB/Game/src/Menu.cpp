@@ -44,7 +44,9 @@ Menu::Menu() {
     hard.setFillColor(sf::Color::Red);
     hard.setPosition(300, 300);
 }
-Menu::~Menu(){}
+Menu::~Menu(){
+delete this->window;
+}
 
 int Menu::run() {
     while (window->isOpen()) {

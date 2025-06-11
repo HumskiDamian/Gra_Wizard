@@ -16,7 +16,7 @@ class Bonus
     public:
         Bonus();
         ~Bonus();
-        void setBonus(float a,sf::Vector2f pos,int typ);
+        void setBonus(float a,sf::Vector2f pos,int _typ);
         void update(float dTime);
         void render(sf::RenderTarget* target);
         int getTyp();
