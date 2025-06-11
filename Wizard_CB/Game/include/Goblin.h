@@ -10,6 +10,10 @@ public:
     ~Goblin();
 
     void attack(Player& player) override;
+    void update(float deltaTime, Player& player) override;
+private:
+    sf::Texture texture1;
+
 
 };
 

@@ -10,7 +10,7 @@
 class Trap
 {
     private:
-
+        sf::Texture texture;
         sf::RectangleShape trap;
         float damage;
         float x,y,w,h;

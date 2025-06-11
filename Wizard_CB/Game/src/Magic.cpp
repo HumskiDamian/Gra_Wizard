@@ -1,6 +1,15 @@
 #include "Magic.h"
 
-    Magic::Magic(){}
+    Magic::Magic(){
+    if (!texture1.loadFromFile("./image/fire1.png")) {
+		std::cerr << "B³¹d ³adowania tekstury png" << std::endl;
+	}
+	texture1.setRepeated(true);
+	if (!texture2.loadFromFile("./image/water.png")) {
+		std::cerr << "B³¹d ³adowania tekstury png" << std::endl;
+	}
+	texture2.setRepeated(true);
+    }
     void Magic::setMagic(float _maxDist,
     float _speed,
     float _damage,
@@ -26,9 +35,12 @@
         dis=0;
         body.setRadius(body_size);
         if(typ==1)
-            body.setFillColor(sf::Color::Red);
+            body.setTexture(&texture1);
+            //body.setFillColor(sf::Color::Red);
+
         if(typ!=1)
-            body.setFillColor(sf::Color::Blue);
+            body.setTexture(&texture2);
+            //body.setFillColor(sf::Color::Blue);
         body.setPosition(pos);
 
         sf::Vector2f dir;

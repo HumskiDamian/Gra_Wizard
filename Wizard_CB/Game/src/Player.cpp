@@ -114,7 +114,7 @@ void Player::takeDamage(const int damage)
 
 	if (this->hp < 0)
 		this->hp = 0;
-        hpTimer=1;
+        hpTimer=0.5;
     }
 
 }
@@ -259,7 +259,7 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
     if(round(hp)>0)
     {
 	this->updateinput(dTime, target);
-	this->levelUp();
+
 	this->updateWindowBoundsCollision(target);
     //std::cout << *x<< ", "<<*y<< ", "<< "\n";
 	//magic.updateMagic(dTime,x,y);
@@ -295,15 +295,12 @@ void Player::render(sf::RenderTarget* target, sf::View* view)
 
 void Player::levelUp()
 {
-	if (this->experienc >= 200 * this->level) {
-		this->experienc = 0;
-		level += 1;
-		this->manaMax += 100;
-		this->hpMax += 50;
-	}
-
-
+		this->manaMax += 2;
+		this->hpMax += 5;
 }
+
+
+
 
 void Player::OnCollision(sf::Vector2f direction)
 {

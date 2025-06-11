@@ -33,6 +33,13 @@ protected:
     float height;
     bool canFly;
     float attackTimer;
+    sf::Texture texture;
+    sf::Sprite sprite;
+    int frameWidth;
+    int frameHeight;
+    int frameCount;  // Liczba klatek w jednym wierszu
+    int currentFrame;
+    float frameTime;
 
 public:
     Enemy(float x, float y, float width, float height, float health, float damage, float detectionRadius, float attackRadius, float speed);

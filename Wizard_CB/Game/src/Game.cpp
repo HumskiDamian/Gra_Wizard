@@ -16,7 +16,7 @@ void Game::initVariables(int dif)
 	this->Lwall.setColor(0,0,0,0);
 	texture.loadFromFile("./image/zamek.png");
 	this->ending.setSize(sf::Vector2f(400,400));
-	this->ending.setPosition(sf::Vector2f(10000,130));
+	this->ending.setPosition(sf::Vector2f(15000,130));
 	this->ending.setTexture(&texture);
 	//this->ending.setFillColor(sf::Color::Blue);
 	srand(time(NULL));
@@ -26,6 +26,7 @@ void Game::initVariables(int dif)
     }
     //player.setVelocity_y(981.f);
     int dLos=1000;
+
     for (auto& tr : traps) {
         dLos+=(rand()%1500+200);
 		tr.setPos(dLos);
@@ -39,6 +40,16 @@ void Game::initVariables(int dif)
         dLos+=(rand()%1500);
 		gob.setPos(dLos);
 		gob.setDmg_hp(dif);
+	}
+	skelLos = (rand()%50)+5;
+	for(int i=1;i<=skelLos;i++){
+        skeletons.emplace_back();
+    }
+	dLos=1000;
+	for (auto& skel : skeletons) {
+        dLos+=(rand()%2000);
+		skel.setPos(dLos);
+		skel.setDmg_hp(dif);
 	}
 	platLos = (rand()%10)+1;
     for(int i=1;i<=platLos;i++){
@@ -73,6 +84,29 @@ void Game::initVariables(int dif)
     mag_t=0;
     proficiency=1;
     typ=1;
+
+    if (!bgTexture.loadFromFile("./image/las1.jpg")) {
+    std::cerr << "B³¹d ³adowania tekstury las.jpg" << std::endl;
+    } else {
+    bgTexture.setRepeated(true);  // pozwala na powtarzanie tekstury
+
+    //background.setTexture(&bgTexture);  // przypisanie tekstury do obiektu
+    //background.setTextureRect(sf::IntRect(0, 0, a * 30, b*2));  // rozci¹gniêcie obszaru tekstury
+    background.setSize(sf::Vector2f(a*30, b+800));  // ustawia rozmiar t³a
+   // background.setPosition(0.f, 0.f);  // pozycja startowa
+    //background.setSize(sf::Vector2f(a * 30, static_cast<float>(bgTexture.getSize().y*60)));
+    bgTexture.setRepeated(true);  // pozwala na powtarzanie tekstury
+
+    background.setTexture(&bgTexture);
+
+    // Powtarzanie tylko w poziomie (szerokoœæ = a * 30, wysokoœæ = wysokoœæ oryginalnej tekstury)
+   background.setTextureRect(sf::IntRect(0, 0, a*10, bgTexture.getSize().y));
+
+    // Rozmiar prostok¹ta musi siê zgadzaæ z TextureRect
+
+
+    background.setPosition(-1000.f, -700.f);
+    }
 }
 
 void Game::initWindow()
@@ -185,11 +219,26 @@ void Game::update(float dTime)
         if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f))
 		player.OnCollision(direction);
 	}
+	for (auto& skel : skeletons) {
+        if (skel.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f))
+		player.OnCollision(direction);
+	}
 	for (auto& gob : goblins) {
         for (auto mag = magic.begin(); mag != magic.end(); ) {
             if (mag->getShape().getGlobalBounds().intersects(gob.getShape().getGlobalBounds())) {
                 gob.takeDamage(mag->getDmg());
                 mag = magic.erase(mag);
+                player.levelUp();
+            }
+            else ++mag;
+        }
+	}
+	for (auto& skel : skeletons) {
+        for (auto mag = magic.begin(); mag != magic.end(); ) {
+            if (mag->getShape().getGlobalBounds().intersects(skel.getShape().getGlobalBounds())) {
+                skel.takeDamage(mag->getDmg());
+                mag = magic.erase(mag);
+                player.levelUp();
             }
             else ++mag;
         }
@@ -257,6 +306,9 @@ void Game::update(float dTime)
     for (auto& gob : goblins) {
 		gob.update(dTime, player);
 	}
+	for (auto& skel : skeletons) {
+		skel.update(dTime, player);
+	}
     this->trap.update(&player);
     this->trap.setApraisal(player.getApraisal());
     for (auto& tr : traps) {
@@ -285,11 +337,18 @@ void Game::update(float dTime)
             gob=goblins.erase(gob);
         else ++gob;
 	}
+	for (auto skel = skeletons.begin(); skel != skeletons.end(); ) {
+        if(skel->isDead()==true)
+            skel=skeletons.erase(skel);
+        else ++skel;
+	}
 }
 
 void Game::render()
 {
+
 	this->window->clear(sf::Color(70,180,220));
+	window->draw(background);
 	view.setCenter(player.GetPosition().x,player.GetPosition().y-150);
 	window->setView(view);
     this->trap.render(this->window);
@@ -306,6 +365,9 @@ void Game::render()
 	window->draw(ending);
     for (auto& gob : goblins) {
 		gob.render(this->window);
+	}
+	for (auto& skel : skeletons) {
+		skel.render(this->window);
 	}
 	for (auto& mag : magic) {
 		mag.render(this->window);

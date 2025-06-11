@@ -21,11 +21,13 @@
 #include "Trap.h"
 #include "Bonus.h"
 #include "Magic.h"
+#include "Skeleton.h"
 class Game
 {
 private:
 	//GameSave saveManager;
-
+    sf::RectangleShape background;
+    sf::Texture bgTexture;
 
 	sf::VideoMode videomode;
 	sf::RenderWindow* window;
@@ -44,6 +46,7 @@ private:
     int x,y;
     int trapLos;
     int goblinLos;
+    int skelLos;
     int platLos;
 
 	sf::Event windowEvent;
@@ -56,6 +59,7 @@ private:
     std::vector<Platform> platforms;
     std::vector<Magic> magic;
     std::vector<Bonus> bonus;
+    std::vector<Skeleton> skeletons;
 
 	Goblin goblin;
 	Trap trap;

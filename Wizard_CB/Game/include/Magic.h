@@ -35,6 +35,8 @@ protected:
     sf::Vector2f direction;
     sf::CircleShape body;
     int typ;
+    sf::Texture texture1;
+    sf::Texture texture2;
 public:
     Magic();
     void setMagic(float _maxDist,

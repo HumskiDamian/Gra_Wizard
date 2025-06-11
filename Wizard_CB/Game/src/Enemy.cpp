@@ -6,6 +6,7 @@ Enemy::Enemy(float x, float y, float width, float height, float health, float da
     attackTimer=0.f;
     cy=1;
     cx=1;
+
 }
 
 Enemy::~Enemy() {}

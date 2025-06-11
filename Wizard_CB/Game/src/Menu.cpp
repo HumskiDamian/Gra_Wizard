@@ -9,7 +9,11 @@ Menu::Menu() {
         throw "Brak czcionki!";
     }
     krok=0;
-
+    title.setFont(font);
+    title.setString("Wizard");
+    title.setCharacterSize(70);
+    title.setFillColor(sf::Color::White);
+    title.setPosition(300, 90);
     // Konfiguracja przycisku START
     startText.setFont(font);
     startText.setString("Start");
@@ -25,7 +29,7 @@ Menu::Menu() {
     exitText.setPosition(300, 300);
     //poziom trudności
     dif.setFont(font);
-    dif.setString("difficulty:");
+    dif.setString("choose difficulty:");
     dif.setCharacterSize(50);
     dif.setFillColor(sf::Color::White);
     dif.setPosition(300, 100);
@@ -77,6 +81,7 @@ int Menu::run() {
 
         window->clear(sf::Color::Black);
         if(krok==0){
+            window->draw(title);
             window->draw(startText);
             window->draw(exitText);
         }

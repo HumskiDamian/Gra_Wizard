@@ -10,6 +10,7 @@ class Menu
  private:
     sf::RenderWindow* window;
     sf::Font font;
+    sf::Text title;
     sf::Text startText;
     sf::Text exitText;
     sf::Text dif;
