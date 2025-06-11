@@ -105,7 +105,10 @@ void Game::pollEvents()
                 player.setMana(10/proficiency);
                 mag_t=1.5;
                 magic.emplace_back();
-                //magic.back().setMagic();
+                //if(typ==1)
+                    //magic.back().setMagic();
+                //if(typ!=1)
+                   //magic.back().setMagic();
             }
 		}
 	}
