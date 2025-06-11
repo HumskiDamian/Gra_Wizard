@@ -25,7 +25,6 @@
 class Game
 {
 private:
-	//GameSave saveManager;
     sf::RectangleShape background;
     sf::Texture bgTexture;
 
@@ -50,7 +49,6 @@ private:
     int platLos;
 
 	sf::Event windowEvent;
-	//sf::RectangleShape floor;
 	Player player;
 	Platform plat;
 	Platform Lwall;

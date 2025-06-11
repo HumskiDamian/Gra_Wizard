@@ -37,7 +37,7 @@ protected:
     sf::Sprite sprite;
     int frameWidth;
     int frameHeight;
-    int frameCount;  // Liczba klatek w jednym wierszu
+    int frameCount;
     int currentFrame;
     float frameTime;
 

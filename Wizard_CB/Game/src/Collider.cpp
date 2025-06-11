@@ -23,7 +23,6 @@ bool Collider::CheckCollider(Collider other, sf::Vector2f& direction, float push
 	sf::Vector2f otherHalfSize = other.GetHalfSize();
 	sf::Vector2f thisPosition = GetPosition();
 	sf::Vector2f thisHalfSize = GetHalfSize();
-   /// std::cout<<otherPosition.x<<"............"<<otherPosition.y<<std::endl;
 	float deltaX = otherPosition.x - thisPosition.x;
 	float deltaY = otherPosition.y - thisPosition.y;
 

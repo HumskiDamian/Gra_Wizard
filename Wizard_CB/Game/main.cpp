@@ -20,11 +20,7 @@ int main()
     float deltaTime;
     Game game(result);
     sf::Clock deltaClock;
-    /*Menu menu();
-    int result = menu.run();
-    if (result == 0) {
-        return 0; // Zakoñczenie programu
-    }*/
+
     while (game.running()) {
         deltaTime = deltaClock.restart().asSeconds();
         game.update(deltaTime);

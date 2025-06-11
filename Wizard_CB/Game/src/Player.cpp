@@ -34,18 +34,12 @@ void Player::initVariables()
     manaText.setColor(sf::Color(255,255,255));
     manaText.setCharacterSize(24);
     manaText.setPosition(40,40);
-    /*Timer.setFont(fridays);
-	Timer.setColor(sf::Color(255,255,255));
-    Timer.setCharacterSize(24);
-    Timer.setPosition(800,10);*/
 
 	this->movementSpeed = 500.f;
 	this->hpMax = 100;
 	this->manaMax = 100;
 	this->mana = manaMax;
 	this->hp = hpMax;
-	/*this->go.x = 0;
-	this->go.y = 0;*/
 	this->jumpHeight = 200;
 	this->level = 1;
 	this->experienc = 0;
@@ -59,7 +53,6 @@ void Player::initVariables()
 
 void Player::initShape()
 {
-	//this->shape.setFillColor(sf::Color::Red);
 	this->shape.setSize(sf::Vector2f(25.f, 50.f));
 	this->shape.setOrigin(sf::Vector2f(25.f, 50.f) / 2.f);
 	this->shape.setTexture(&texture);
@@ -83,22 +76,19 @@ Player::~Player()
 
 const sf::RectangleShape& Player::getShape() const
 {
-	// TODO: tu wstawiæ instrukcjê return
 	return this->shape;
 }
 
 const float Player::getHp() const
 {
-	// TODO: tu wstawiæ instrukcjê return
 	return this->hp;
 }
 
 const float Player::getHpMax() const
 {
-	// TODO: tu wstawiæ instrukcjê return
 	return this->hpMax;
 }
-//========================================================================================================take damage
+
 void Player::takeDamage(const int damage)
 {
     if(hpTimer<=0){
@@ -202,30 +192,10 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
 		this->onGround=false;
 
 	}
-	//std::cout << canJump << "\n";
-	//if(canJump==false)
     this->velocity.y += gravity * dTime;
 
 	this->shape.move(velocity * dTime);
 	barrier.setPosition(shape.getPosition().x-25.f,shape.getPosition().y-25.f);
-
-	//mouse------------------------------===========================================magic-----------------------------------
-/*
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            if(timerMag<=0.f){
-            if (this->mana >= this->magic.getMana() && magic.getCanActivMagic()) {
-			this->mana -= magic.getMana();
-			magic.shoot(sf::Vector2f (shape.getPosition()), target);
-			magic.setIncantation_t();
-		}
-		//std::cout << "prawy_przycisk---------------------------------" << "\n";
-		timerMag=magic.getTime();
-	}
-	}*/
-
-
-
-
 }
 void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 {
@@ -252,7 +222,6 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 
         hpText.setString(sshp.str());
         manaText.setString(ssmana.str());
-        //Timer.setString(sstime.str());
         hpStat.setScale(sf::Vector2f(hp/hpMax,1));
         manaStat.setScale(sf::Vector2f(mana/manaMax,1));
     }
@@ -261,8 +230,6 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 	this->updateinput(dTime, target);
 
 	this->updateWindowBoundsCollision(target);
-    //std::cout << *x<< ", "<<*y<< ", "<< "\n";
-	//magic.updateMagic(dTime,x,y);
 	if(this->mana<this->manaMax){
         this->mana+=5*dTime;
 	}
@@ -271,9 +238,6 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 	}
     }
 
-    //fonts and text
-
-       /// std::cout<<velocity.x<<"----------"<<velocity.y<<std::endl;
 }
 
 void Player::render(sf::RenderTarget* target, sf::View* view)

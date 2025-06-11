@@ -24,7 +24,7 @@ void Game::initVariables(int dif)
     for(int i=1;i<=trapLos;i++){
         traps.emplace_back();
     }
-    //player.setVelocity_y(981.f);
+
     int dLos=1000;
 
     for (auto& tr : traps) {
@@ -88,23 +88,10 @@ void Game::initVariables(int dif)
     if (!bgTexture.loadFromFile("./image/las1.jpg")) {
     std::cerr << "B³¹d ³adowania tekstury las.jpg" << std::endl;
     } else {
-    bgTexture.setRepeated(true);  // pozwala na powtarzanie tekstury
-
-    //background.setTexture(&bgTexture);  // przypisanie tekstury do obiektu
-    //background.setTextureRect(sf::IntRect(0, 0, a * 30, b*2));  // rozci¹gniêcie obszaru tekstury
-    background.setSize(sf::Vector2f(a*30, b+800));  // ustawia rozmiar t³a
-   // background.setPosition(0.f, 0.f);  // pozycja startowa
-    //background.setSize(sf::Vector2f(a * 30, static_cast<float>(bgTexture.getSize().y*60)));
-    bgTexture.setRepeated(true);  // pozwala na powtarzanie tekstury
-
+    bgTexture.setRepeated(true);
+    background.setSize(sf::Vector2f(a*30, b+800));
     background.setTexture(&bgTexture);
-
-    // Powtarzanie tylko w poziomie (szerokoœæ = a * 30, wysokoœæ = wysokoœæ oryginalnej tekstury)
-   background.setTextureRect(sf::IntRect(0, 0, a*10, bgTexture.getSize().y));
-
-    // Rozmiar prostok¹ta musi siê zgadzaæ z TextureRect
-
-
+    background.setTextureRect(sf::IntRect(0, 0, a*10, bgTexture.getSize().y));
     background.setPosition(-1000.f, -700.f);
     }
 }
@@ -114,8 +101,6 @@ void Game::initWindow()
 	this->videomode = sf::VideoMode(a, b);
 	this->window = new sf::RenderWindow(this->videomode, "Game 1", sf::Style::Close | sf::Style::Titlebar);
 	this->window->setFramerateLimit(120);
-
-
 }
 
 //konstruktor i destruktor
@@ -149,9 +134,7 @@ void Game::pollEvents()
                 typ=2;
 			break;
 		}
-		///********************************************************************************************
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-
             if(player.getMana()>=(10/proficiency) && mag_t<=0 ){
                 player.setMana(10/proficiency);
                 mag_t=1.5;
@@ -159,17 +142,6 @@ void Game::pollEvents()
                 if(typ==1)
                     magic.back().setMagic(800.f*proficiency,2.f*proficiency,100.f*(proficiency+0.5),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
                 if(typ!=1)
-                    /*float maxDist,
-    float speed,
-    float damage,
-    float time,
-    float mana,
-    float body_size,
-    float incantation,
-    sf::Vector2f pos,
-    float tar_x,
-    float tar_y,
-    int typ, const sf::RenderTarget* target*/
                    magic.back().setMagic(1000.f*proficiency,2.f*proficiency,100.f*(proficiency-0.1),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
                 proficiency+=0.05;
             }
@@ -184,18 +156,11 @@ void Game::updateCollision()
 
 void Game::update(float dTime)
 {
-    //std::cout<<sf::Mouse::getPosition(*window).x<<"===="<<sf::Mouse::getPosition(*window).y<<std::endl;
 
 	this->pollEvents();
 
 	if(mag_t>0) mag_t-=dTime;
-    //std::cout << sf::Mouse::getPosition(*window).x<< ", "<<sf::Mouse::getPosition(*window).y<< ", "<<window->getPosition().x<< "\n";//-------------------------------------------------
-
-	/*if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
-		player.OnCollision(direction);
-	}*/
 	if (plat.GetCollider().GetBounds().top-(player.getCollider().GetBounds().top+player.getCollider().GetBounds().height)<=0){
-            //std::cout<<plat.GetCollider().GetBounds().top-player.getCollider().GetBounds().top+player.getCollider().GetBounds().height-100<<std::endl;
         player.setVelocity_y(0.f);
         player.OnCollision(sf::Vector2f(0.f,0.f));
 
@@ -209,11 +174,8 @@ void Game::update(float dTime)
 	}
 	for (auto& plat : platforms) {
         if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
-            //player.setVelocity_y(0.f);
 		player.OnCollision(direction);
-	}
-	//else
-        //player.setVelocity_y(981.f);
+        }
 	}
 	for (auto& gob : goblins) {
         if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f))
@@ -260,49 +222,17 @@ void Game::update(float dTime)
             else ++mag;
         }
 	}
-	///******************************************************************************************************************?
-	 /*for (auto gob = goblins.begin(); gob != goblins.end(); ++gob){
-        for (auto gob1 = goblins.begin(); gob1 != goblins.end(); ++gob1)
-        {
-            if(gob!=gob){
-                gob.GetCollider().CheckCollider(gob1.GetCollider(), direction, 0.3f)
-
-
-            }
-        }
-	 }*/
-
-
-
-        ///=======================================================================================================
-    /*for (auto& plat : platforms) {
-        if(plat.GetCollider().GetBounds().top-(player.getCollider().GetBounds().top+player.getCollider().GetBounds().height)<=0){
-            std::cout<<"tak"<<std::endl;
-            player.setVelocity_y(0.f);}
-        else {player.setVelocity_y(981.f); std::cout<<"nie"<<std::endl;}
-    }*/
-
-/*
-    for (auto& gob : goblins) {
-        gob.takeDamage(player.takeRect(gob.getShape()));
-	}*/
-
 	if(ending.getGlobalBounds().intersects(player.getShape().getGlobalBounds())){
         endgame=true;
 
 	}
 	if(player.getHp()<=0){
         endgame=true;
-
-
-
 	}
 
 	this->x=sf::Mouse::getPosition(*window).x;
     this->y=sf::Mouse::getPosition(*window).y-150;
-    //std::cout << this->x<< ", "<<this->y<< ", "<< "\n";
 	this->player.update(this->window, dTime, &this->x, &this->y);
-    //this->goblin.update(dTime, player);
     for (auto& gob : goblins) {
 		gob.update(dTime, player);
 	}
@@ -361,7 +291,6 @@ void Game::render()
 	this->plat.render(this->window);
 	this->Lwall.render(this->window);
 	this->player.render(this->window,&view);
-	//this->goblin.render(this->window);
 	window->draw(ending);
     for (auto& gob : goblins) {
 		gob.render(this->window);
