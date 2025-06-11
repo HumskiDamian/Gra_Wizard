@@ -19,6 +19,7 @@ class Magic
 {
 
 protected:
+    float dis;
     float maxDist;
     float speed;
     float damage;
@@ -28,21 +29,29 @@ protected:
     float incantation;
     float x;
     float y;
+    float tar_x;
+    float tar_y;
     sf::Vector2f pos;
-    sf::RectangleShape body;
+    sf::Vector2f direction;
+    sf::CircleShape body;
 public:
-    Magic(float maxDist,
+    Magic();
+    void setMagic(float maxDist,
     float speed,
     float damage,
     float time,
     float mana,
     float body_size,
     float incantation,
-    float x,
-    float y);
-	virtual~Magic();
-	virtual void update(float deltaTime);
-    virtual void render(sf::RenderTarget* target);
+    sf::Vector2f pos,
+    float tar_x,
+    float tar_y,
+    int typ, const sf::RenderTarget* target);
+	~Magic();
+	void update(float deltaTime);
+    void render(sf::RenderTarget* target);
+    float getDmg();
+    bool isDist();
 /*protected:
 
 

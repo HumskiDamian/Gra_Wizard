@@ -4,6 +4,8 @@ Enemy::Enemy(float x, float y, float width, float height, float health, float da
     : health(health), damage(damage), detectionRadius(detectionRadius), attackRadius(attackRadius), speed(speed), isAttacking(false), x(x), y(y), width(width), height(height) {
     canFly=false;
     attackTimer=0.f;
+    cy=1;
+    cx=1;
 }
 
 Enemy::~Enemy() {}
@@ -50,7 +52,7 @@ void Enemy::moveToPlayer(const Player& player, float deltaTime) {
         direction /= length;
     }
 
-    body.move(direction * speed * deltaTime);
+    body.move(direction * speed * deltaTime*cx);
 
     }
     }
@@ -85,3 +87,28 @@ void Enemy::setDmg_hp(int dif){
     damage*=dif;
     health*=dif;
 }
+
+void Enemy::OnCollision(sf::Vector2f direction)
+{
+	if (direction.x < 0.f) {
+		//collisionj on left
+		cx=0;
+	}
+	else if (direction.x > 0.f) {
+
+		cx=0;
+
+	}
+
+	if (direction.y <= 0.f) {
+
+
+	}
+	else if (direction.y > 0.f) {
+
+
+
+	}
+	else cx=1;
+}
+

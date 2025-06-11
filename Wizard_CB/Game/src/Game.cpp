@@ -54,6 +54,9 @@ void Game::initVariables(int dif)
     view.setCenter(sf::Vector2f(0.f,0.f));
     view.setSize(sf::Vector2f(a,b));
 
+    mag_t=0;
+    proficiency=1;
+    typ=1;
 }
 
 void Game::initWindow()
@@ -90,7 +93,20 @@ void Game::pollEvents()
 		case sf::Event::KeyPressed:
 			if (this->windowEvent.key.code == sf::Keyboard::Escape)
 				this->window->close();
+            if(this->windowEvent.key.code == sf::Keyboard::Num1)
+                typ=1;
+            if(this->windowEvent.key.code == sf::Keyboard::Num2)
+                typ=2;
 			break;
+		}
+		///********************************************************************************************
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if(player.getMana()>=(10/proficiency) && mag_t<=0 ){
+                player.setMana(10/proficiency);
+                mag_t=1.5;
+                magic.emplace_back();
+                //magic.back().setMagic();
+            }
 		}
 	}
 }
@@ -105,6 +121,7 @@ void Game::update(float dTime)
 
 	this->pollEvents();
 
+	if(mag_t>0) mag_t-=dTime;
     //std::cout << sf::Mouse::getPosition(*window).x<< ", "<<sf::Mouse::getPosition(*window).y<< ", "<<window->getPosition().x<< "\n";//-------------------------------------------------
 
 	/*if (plat.GetCollider().CheckCollider(player.getCollider(), direction, 1.f)) {
@@ -132,10 +149,24 @@ void Game::update(float dTime)
         //player.setVelocity_y(981.f);
 	}
 	for (auto& gob : goblins) {
-        if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f)) {
+        if (gob.GetCollider().CheckCollider(player.getCollider(), direction, 0.3f))
 		player.OnCollision(direction);
 	}
+	///******************************************************************************************************************?
+	 /*for (auto gob = goblins.begin(); gob != goblins.end(); ++gob){
+        for (auto gob1 = goblins.begin(); gob1 != goblins.end(); ++gob1)
+        {
+            if(gob!=gob){
+                if (gob.GetCollider().CheckCollider(gob1.getCollider(), direction, 0.3f)) {
+                gob1.OnCollision(direction);
+            }
+            }
+        }
+	 }*/
+	for (auto& mag : magic) {
+		mag.update(dTime);
 	}
+
         ///=======================================================================================================
     /*for (auto& plat : platforms) {
         if(plat.GetCollider().GetBounds().top-(player.getCollider().GetBounds().top+player.getCollider().GetBounds().height)<=0){
@@ -195,6 +226,9 @@ void Game::render()
 	window->draw(ending);
     for (auto& gob : goblins) {
 		gob.render(this->window);
+	}
+	for (auto& mag : magic) {
+		mag.render(this->window);
 	}
 	this->window->display();
 }

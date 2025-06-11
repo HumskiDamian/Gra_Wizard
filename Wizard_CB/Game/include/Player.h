@@ -14,7 +14,8 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include "Collider.h"
-#include "Magic.h"
+#include "Math.h"
+//#include "Magic.h"
 
 
 
@@ -101,10 +102,12 @@ public:
 	void OnCollision(sf::Vector2f direction);
 	Collider getCollider();
 	bool getApraisal();
-	Magic* magick();
+	//Magic* magick();
 	float takeRect(sf::RectangleShape& enemy);
 	float getTimer();
     void setVelocity_y(float vel_y);
+    void setMana(float m);
+    float getMana();
 
 
 

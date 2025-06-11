@@ -19,7 +19,7 @@ class Enemy
 {
 protected:
 
-
+    float cy,cx;
     sf::RectangleShape body;
     float health;
     float damage;
@@ -48,6 +48,7 @@ public:
     virtual void setPos(int d);
     sf::RectangleShape& getShape();
     virtual void setDmg_hp(int dif);
+    void OnCollision(sf::Vector2f direction);
     bool isDead() const;
     Collider GetCollider();
 };

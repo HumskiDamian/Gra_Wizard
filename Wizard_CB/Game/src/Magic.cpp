@@ -1,22 +1,56 @@
 #include "Magic.h"
 
-    Magic::Magic(float maxDist,
+    Magic::Magic(){}
+    void Magic::setMagic(float maxDist,
     float speed,
     float damage,
     float time,
     float mana,
     float body_size,
     float incantation,
-    float x,
-    float y){
+    sf::Vector2f pos,
+    float tar_x,
+    float tar_y,
+    int typ, const sf::RenderTarget* target){
+        maxDist=maxDist;
+        speed=speed;
+        damage=damage;
+        mana=mana;
+        body_size=body_size;
+        pos=pos;
+        tar_x=tar_x;
+        tar_y=tar_y;
+        dis=0;
+        body.setRadius(body_size);
+        if(typ==1)
+            body.setFillColor(sf::Color::Red);
+        if(typ!=1)
+            body.setFillColor(sf::Color::Blue);
+        body.setPosition(pos);
+
+        sf::Vector2f dir;
+        sf::Vector2u windowSize=target->getSize();
+        dir.x=tar_x-(windowSize.x/2);
+        dir.y=tar_y-(windowSize.y/2);
+        //std::cout<<x<<","<<y<<"\n";
+        dir.x/=sqrt(dir.x*dir.x+dir.y*dir.y);
+        dir.y/=sqrt(pow(x-800,2)+pow(y-450,2));
+        direction=dir;
 
     }
 	Magic::~Magic(){}
 	void Magic::update(float deltaTime){
-
+        dis+=sqrt(direction.x*direction.x+direction.y*direction.y)*speed*deltaTime;
+        this->body.move(direction*speed*deltaTime);
 	}
     void Magic::render(sf::RenderTarget* target){
-
+        target->draw(this->body);
+    }
+    float Magic::getDmg(){
+        return damage;
+    }
+    bool Magic::isDist(){
+        return (maxDist<dis);
     }
 /*
 Magic::Magic()

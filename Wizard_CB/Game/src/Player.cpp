@@ -356,4 +356,10 @@ void Player::setVelocity_y(float vel_y){
     gravity=vel_y;
 }
 
-
+void Player::setMana(float m){
+    this->mana-=m;
+    if(this->mana<0) this->mana=0;
+}
+float Player::getMana(){
+    return this->mana;
+}

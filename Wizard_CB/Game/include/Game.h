@@ -19,6 +19,7 @@
 #include "GameSave.h"
 #include "Goblin.h"
 #include "Trap.h"
+#include "Magic.h"
 class Game
 {
 private:
@@ -52,11 +53,15 @@ private:
 	std::vector<Trap> traps;
     std::vector<Goblin> goblins;
     std::vector<Platform> platforms;
+    std::vector<Magic> magic;
 
 	Goblin goblin;
 	Trap trap;
 
-
+    //=======magic
+    float proficiency;
+    int typ;
+    float mag_t;
 
     sf::Vector2i mouse;
 	sf::Text guiText;
