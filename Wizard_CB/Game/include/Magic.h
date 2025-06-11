@@ -29,8 +29,8 @@ protected:
     float incantation;
     float x;
     float y;
-    float tar_x;
-    float tar_y;
+    int tar_x;
+    int tar_y;
     sf::Vector2f pos;
     sf::Vector2f direction;
     sf::CircleShape body;
@@ -44,8 +44,8 @@ public:
     float body_size,
     float incantation,
     sf::Vector2f pos,
-    float tar_x,
-    float tar_y,
+    int tar_x,
+    int tar_y,
     int typ, const sf::RenderTarget* target);
 	~Magic();
 	void update(float deltaTime);

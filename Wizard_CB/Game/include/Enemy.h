@@ -50,7 +50,7 @@ public:
     virtual void setDmg_hp(int dif);
     void OnCollision(sf::Vector2f direction);
     bool isDead() const;
-    Collider GetCollider();
+    virtual Collider GetCollider();
 };
 
 

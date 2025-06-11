@@ -105,10 +105,22 @@ void Game::pollEvents()
                 player.setMana(10/proficiency);
                 mag_t=1.5;
                 magic.emplace_back();
-                //if(typ==1)
-                    //magic.back().setMagic();
-                //if(typ!=1)
-                   //magic.back().setMagic();
+                if(typ==1)
+                    magic.back().setMagic(1000.f/proficiency,200.f*proficiency,100.f*(proficiency+0.5),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
+                if(typ!=1)
+                    /*float maxDist,
+    float speed,
+    float damage,
+    float time,
+    float mana,
+    float body_size,
+    float incantation,
+    sf::Vector2f pos,
+    float tar_x,
+    float tar_y,
+    int typ, const sf::RenderTarget* target*/
+                   magic.back().setMagic(1000.f*proficiency,200.f*proficiency,100.f*(proficiency-0.1),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
+                proficiency+=0.01;
             }
 		}
 	}
@@ -160,9 +172,9 @@ void Game::update(float dTime)
         for (auto gob1 = goblins.begin(); gob1 != goblins.end(); ++gob1)
         {
             if(gob!=gob){
-                if (gob.GetCollider().CheckCollider(gob1.getCollider(), direction, 0.3f)) {
-                gob1.OnCollision(direction);
-            }
+                gob.GetCollider().CheckCollider(gob1.GetCollider(), direction, 0.3f)
+
+
             }
         }
 	 }*/

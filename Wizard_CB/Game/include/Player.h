@@ -43,6 +43,7 @@ private:
     float timerHeal;
     float timerBarrier;
     float timerApraisal;
+    sf::CircleShape barrier;
 
 	//stats
 	float hp;

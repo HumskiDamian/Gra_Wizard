@@ -1,7 +1,7 @@
 #include "Goblin.h"
 
 Goblin::Goblin()
-    : Enemy(500.f, 300.f, 50.f, 50.f, 100.f, 10.f, 500.f, 50.f, 150.f) {
+    : Enemy(500.f, 300.f, 50.f, 50.f, 100.f, 30.f, 500.f, 80.f, 150.f) {
         body.setSize(sf::Vector2f(width, height));
     body.setPosition(x, y);
     body.setFillColor(sf::Color(44,91,1));

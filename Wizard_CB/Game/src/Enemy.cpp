@@ -91,7 +91,7 @@ void Enemy::setDmg_hp(int dif){
 void Enemy::OnCollision(sf::Vector2f direction)
 {
 	if (direction.x < 0.f) {
-		//collisionj on left
+
 		cx=0;
 	}
 	else if (direction.x > 0.f) {

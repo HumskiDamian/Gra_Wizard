@@ -54,7 +54,7 @@ void Player::initVariables()
 	this->timerBarrier=0.f;
 	this->barier=0.f;
 	this->barierMana=50;
-	this->apraisalMana=10;
+	this->apraisalMana=40;
 }
 
 void Player::initShape()
@@ -63,12 +63,15 @@ void Player::initShape()
 	this->shape.setSize(sf::Vector2f(25.f, 50.f));
 	this->shape.setOrigin(sf::Vector2f(25.f, 50.f) / 2.f);
 	this->shape.setTexture(&texture);
+	barrier.setRadius(30.f);
+	barrier.setFillColor(sf::Color::Blue);
 }
 
 
 Player::Player(float x, float y)
 {
 	this->shape.setPosition(300, 200);
+	barrier.setPosition(300-25.f,200-25.f);
 	this->initVariables();
 	this->initShape();
 }
@@ -134,10 +137,10 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
             this->timerHeal=3;
             if(this->mana >=20.f){
                     mana-=20;
-                if(this->hp>this->hpMax-80.f)
+                if(this->hp>this->hpMax-25.f)
                     this->hp=this->hpMax;
                 else
-                    this->hp+=80.f;
+                    this->hp+=25.f;
             }
         }
     }
@@ -204,6 +207,7 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
     this->velocity.y += gravity * dTime;
 
 	this->shape.move(velocity * dTime);
+	barrier.setPosition(shape.getPosition().x-25.f,shape.getPosition().y-25.f);
 
 	//mouse------------------------------===========================================magic-----------------------------------
 /*
@@ -274,7 +278,8 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
 
 void Player::render(sf::RenderTarget* target, sf::View* view)
 {
-
+    if(barier>0)
+        target->draw(this->barrier);
 	target->draw(this->shape);
 	//magic.render(target);
 	target->setView(target->getDefaultView());

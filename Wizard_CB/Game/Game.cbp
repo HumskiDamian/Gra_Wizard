@@ -52,6 +52,7 @@
 		<Linker>
 			<Add directory="SFML/lib" />
 		</Linker>
+		<Unit filename="include/Bonus.h" />
 		<Unit filename="include/Collider.h" />
 		<Unit filename="include/Collider_Platform.h" />
 		<Unit filename="include/Enemy.h" />
@@ -65,6 +66,7 @@
 		<Unit filename="include/Shot_Magic.h" />
 		<Unit filename="include/Trap.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Bonus.cpp" />
 		<Unit filename="src/Collider.cpp" />
 		<Unit filename="src/Collider_Platform.cpp" />
 		<Unit filename="src/Enemy.cpp" />

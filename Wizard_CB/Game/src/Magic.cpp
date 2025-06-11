@@ -9,15 +9,15 @@
     float body_size,
     float incantation,
     sf::Vector2f pos,
-    float tar_x,
-    float tar_y,
+    int tar_x,
+    int tar_y,
     int typ, const sf::RenderTarget* target){
         maxDist=maxDist;
         speed=speed;
         damage=damage;
         mana=mana;
         body_size=body_size;
-        pos=pos;
+        pos=sf::Vector2f(pos.x,pos.y-30);
         tar_x=tar_x;
         tar_y=tar_y;
         dis=0;
