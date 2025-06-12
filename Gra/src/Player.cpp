@@ -2,12 +2,17 @@
 
 void Player::initVariables()
 {
+    frameSize = sf::Vector2i(60, 90); // jedna klatka
+    currentFrame = 0;
+    frameTime = 0.f;
+    frameDuration = 0.1f; // czas trwania jednej klatki
     gravity=981.f;
     onGround=false;
     timerMag=0.f;
     hpTimer=0.f;
     TimerT=0.f;
     texture.loadFromFile("./image/wizard.png");
+    texture1.loadFromFile("./image/wizard_1.png");
     //init fonts, text and bars
     fridays.loadFromFile("Fonts/Fridays.ttf");
 	hpStat.setSize(sf::Vector2f(150,25));
@@ -64,7 +69,7 @@ void Player::initShape()
 Player::Player(float x, float y)
 {
 	this->shape.setPosition(300, 200);
-	barrier.setPosition(300-25.f,200-25.f);
+	barrier.setPosition(300-40.f,200-25.f);
 	this->initVariables();
 	this->initShape();
 }
@@ -142,7 +147,7 @@ void Player::updateinput(float dTime, const sf::RenderTarget* target)
 	{
 	if(this->timerBarrier<=0){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-            this->timerBarrier=10;
+            this->timerBarrier=20.f;
             if(this->mana >=barierMana){
                     mana-=barierMana;
                 this->barier=this->hpMax*2;
@@ -228,7 +233,7 @@ void Player::update(const sf::RenderTarget* target, float dTime, int* x, int* y)
     if(round(hp)>0)
     {
 	this->updateinput(dTime, target);
-
+    this->updateAnimation(dTime);
 	this->updateWindowBoundsCollision(target);
 	if(this->mana<this->manaMax){
         this->mana+=5*dTime;
@@ -334,4 +339,37 @@ void Player::setmHp(float h){
 }
 void Player::setmMan(float q){
     manaMax+=q;
+}
+
+void Player::updateAnimation(float dTime)
+{
+    frameTime += dTime;
+
+    // Domyślnie postać stoi (1 wiersz, 1 kolumna)
+    int row = 0;
+    int col = 0;
+
+    bool isMoving = false;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        row = 1; // 2. wiersz → ruch w lewo
+        isMoving = true;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        row = 2; // 3. wiersz → ruch w prawo
+        isMoving = true;
+    }
+
+    if (isMoving) {
+        if (frameTime >= frameDuration) {
+            currentFrame = (currentFrame + 1) % 8; // 8 kolumn
+            frameTime = 0.f;
+        }
+        col = currentFrame;
+    }
+
+    // Ustaw aktualny wycinek tekstury
+    texture1.loadFromFile("./image/wizard_1.png"); // zakładam że to sprite z animacją
+    this->shape.setTexture(&texture1);
+    this->shape.setTextureRect(sf::IntRect(col * frameSize.x, row * frameSize.y, frameSize.x, frameSize.y));
 }

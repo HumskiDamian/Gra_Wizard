@@ -37,6 +37,7 @@ private:
 	sf::Texture texture;
 	sf::RectangleShape ending;
 	bool endgame;
+	bool win;
 	float a, b;
 	bool onGround;
 	float gravity;
@@ -74,6 +75,8 @@ private:
 
 	sf::Vector2f direction;
 
+
+
 public:
 	Game(int dif);
 	~Game();
@@ -86,6 +89,7 @@ public:
 	void update(float dTime);
 	void render();
     bool getEndgame();
+    bool getWin();
 
 };
 

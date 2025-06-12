@@ -12,7 +12,7 @@ Goblin::Goblin()
     if(!texture1.loadFromFile("./image/goblin.png")) {
     std::cerr << "Nie uda³o siê za³adowaæ obrazka!\n";
     }
-    texture.setRepeated(true);
+    texture1.setRepeated(true);
     //body.setTextureRect(sf::IntRect(0, 0, 320, 290));
     body.setTexture(&texture1);
 

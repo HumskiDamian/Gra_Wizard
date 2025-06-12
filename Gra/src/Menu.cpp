@@ -2,7 +2,7 @@
 
 Menu::Menu() {
     this->window = new sf::RenderWindow(sf::VideoMode(800,600), "menu start");
-    //this->window = win;
+
 
     // Za³aduj czcionkê
     if (!font.loadFromFile("Fonts/CalligraphyFLF.ttf")) {

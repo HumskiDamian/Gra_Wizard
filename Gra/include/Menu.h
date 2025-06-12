@@ -21,7 +21,7 @@ class Menu
 public:
     Menu();
     ~Menu();
-    int run(); // 1 - start, 0 - exit
+    int run();
 };
 
 #endif // MENU_H
