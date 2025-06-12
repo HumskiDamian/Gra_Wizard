@@ -84,6 +84,7 @@ void Game::initVariables(int dif)
     mag_t=0;
     proficiency=1;
     typ=1;
+    win = false;
 
     if (!bgTexture.loadFromFile("./image/las1.jpg")) {
     std::cerr << "B³¹d ³adowania tekstury las.jpg" << std::endl;
@@ -224,10 +225,11 @@ void Game::update(float dTime)
 	}
 	if(ending.getGlobalBounds().intersects(player.getShape().getGlobalBounds())){
         endgame=true;
-
+        win=true;
 	}
 	if(player.getHp()<=0){
         endgame=true;
+        win=false;
 	}
 
 	this->x=sf::Mouse::getPosition(*window).x;
@@ -305,8 +307,12 @@ void Game::render()
 		bon.render(this->window);
 	}
 	this->window->display();
+
 }
 bool Game::getEndgame(){
 return endgame;
 }
 
+bool Game::getWin(){
+return win;
+}

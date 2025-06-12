@@ -7,6 +7,7 @@
 #include <fstream>
 #include "Game.h"
 #include "Menu.h"
+#include "EndWindow.h"
 
 int main()
 {
@@ -32,6 +33,9 @@ int main()
 
 
     }
+
+    EndWindow endWindow(game.getWin());
+    endWindow.run();
 
     return 0;
 }
