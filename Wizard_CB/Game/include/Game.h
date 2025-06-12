@@ -75,6 +75,8 @@ private:
 
 	sf::Vector2f direction;
 
+
+
 public:
 	Game(int dif);
 	~Game();

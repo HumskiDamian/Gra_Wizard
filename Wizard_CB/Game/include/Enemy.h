@@ -41,6 +41,8 @@ protected:
     int currentFrame;
     float frameTime;
 
+
+
 public:
     Enemy(float x, float y, float width, float height, float health, float damage, float detectionRadius, float attackRadius, float speed);
     virtual ~Enemy();

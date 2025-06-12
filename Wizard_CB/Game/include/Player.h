@@ -28,6 +28,18 @@ private:
     //stats
     sf::Font fridays;
     sf::Texture texture;
+    sf::Texture texture1;
+    sf::Sprite sprite;
+    int klatka;
+    int Th;
+    int Tw;
+    float ktime;
+
+    int currentFrame;
+    float frameTime;
+    float frameDuration;
+    sf::Vector2i frameSize;
+
 	sf::Text hpText;
 	sf::RectangleShape hpStat;
 	sf::RectangleShape hpStatL;
@@ -111,6 +123,7 @@ public:
     float getMana();
     void setmHp(float h);
     void setmMan(float m);
+    void updateAnimation(float dTime);
 
 
 

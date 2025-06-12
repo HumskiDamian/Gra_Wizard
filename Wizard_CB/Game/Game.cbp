@@ -55,6 +55,7 @@
 		<Unit filename="include/Bonus.h" />
 		<Unit filename="include/Collider.h" />
 		<Unit filename="include/Collider_Platform.h" />
+		<Unit filename="include/EndWindow.h" />
 		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameSave.h" />
@@ -70,6 +71,7 @@
 		<Unit filename="src/Bonus.cpp" />
 		<Unit filename="src/Collider.cpp" />
 		<Unit filename="src/Collider_Platform.cpp" />
+		<Unit filename="src/EndWindow.cpp" />
 		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameSave.cpp" />
