@@ -336,9 +336,11 @@ float Player::getMana(){
 }
 void Player::setmHp(float h){
     hpMax+=h;
+    if(hpMax<hp) hp=hpMax;
 }
 void Player::setmMan(float q){
     manaMax+=q;
+    if(mana>manaMax) mana=manaMax;
 }
 
 void Player::updateAnimation(float dTime)

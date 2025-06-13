@@ -9,16 +9,15 @@ void Game::initVariables(int dif)
 	this->b = 900;
 	this->gravity = 50;
 	this->endgame = false;
-	this->plat.setSize(sf::Vector2f(this->a*30, this->b / 3));
-	this->plat.setPos(sf::Vector2f(this->a*30 / 2.f-800, 680));
+	this->plat.setSize(sf::Vector2f(this->a*15, this->b / 3));
+	this->plat.setPos(sf::Vector2f(this->a*15 / 2.f-800, 680));
 	this->Lwall.setSize(sf::Vector2f(10, 1100));
 	this->Lwall.setPos(sf::Vector2f(0, 0));
 	this->Lwall.setColor(0,0,0,0);
 	texture.loadFromFile("./image/zamek.png");
-	this->ending.setSize(sf::Vector2f(400,400));
-	this->ending.setPosition(sf::Vector2f(15000,130));
+	this->ending.setSize(sf::Vector2f(600,600));
+	this->ending.setPosition(sf::Vector2f(15000,-70));
 	this->ending.setTexture(&texture);
-	//this->ending.setFillColor(sf::Color::Blue);
 	srand(time(NULL));
     trapLos = (rand()%30)+1;
     for(int i=1;i<=trapLos;i++){
@@ -74,8 +73,10 @@ void Game::initVariables(int dif)
         k=2;
     else if(r<=3)
         k=1;
+    else k=1;
         losb+=rand()%100*100;
         bon.setBonus(rand()%40+10,sf::Vector2f(losb,rand()%150+300),k);
+
 	}
 
     view.setCenter(sf::Vector2f(0.f,0.f));
@@ -122,19 +123,17 @@ const bool Game::running() const
 void Game::pollEvents()
 {
 	while (this->window->pollEvent(this->windowEvent)) {
-		switch (this->windowEvent.type) {
-		case sf::Event::Closed:
-			this->window->close();
-			break;
-		case sf::Event::KeyPressed:
-			if (this->windowEvent.key.code == sf::Keyboard::Escape)
+        if(this->windowEvent.type==sf::Event::Closed){
+            this->window->close();
+        }
+        if(this->windowEvent.type==sf::Event::KeyPressed){
+            if (this->windowEvent.key.code == sf::Keyboard::Escape)
 				this->window->close();
             if(this->windowEvent.key.code == sf::Keyboard::Num1)
                 typ=1;
             if(this->windowEvent.key.code == sf::Keyboard::Num2)
                 typ=2;
-			break;
-		}
+        }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             if(player.getMana()>=(10/proficiency) && mag_t<=0 ){
                 player.setMana(10/proficiency);
@@ -196,6 +195,7 @@ void Game::update(float dTime)
             else ++mag;
         }
 	}
+
 	for (auto& skel : skeletons) {
         for (auto mag = magic.begin(); mag != magic.end(); ) {
             if (mag->getShape().getGlobalBounds().intersects(skel.getShape().getGlobalBounds())) {
@@ -258,7 +258,7 @@ void Game::update(float dTime)
 		if(bon->getShape().getGlobalBounds().intersects(player.getShape().getGlobalBounds())&&sf::Keyboard::isKeyPressed(sf::Keyboard::F)){
             if(bon->getTyp()==1) player.setmHp(bon->getPoint());
             if(bon->getTyp()==2) player.setmMan(bon->getPoint());
-            if(bon->getTyp()==3) player.takeDamage(bon->getPoint());
+            if(bon->getTyp()==3) player.setmMan(-(bon->getPoint()));
             bon = bonus.erase(bon);
 		}
 		else ++bon;

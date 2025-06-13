@@ -59,7 +59,7 @@ void Enemy::moveToPlayer(const Player& player, float deltaTime) {
         direction /= length;
     }
 
-    body.move(direction * speed * deltaTime*cx);
+    body.move(sf::Vector2f(direction.x * speed * deltaTime*cx,0.f));
 
     }
     }

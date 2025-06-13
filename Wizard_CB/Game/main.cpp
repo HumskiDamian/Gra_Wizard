@@ -18,6 +18,7 @@ int main()
         return 0; // Zakończenie programu, jeśli użytkownik kliknął "Exit" lub zamknął okno
     }
 
+
     float deltaTime;
     Game game(result);
     sf::Clock deltaClock;
