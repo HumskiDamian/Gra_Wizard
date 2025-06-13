@@ -43,7 +43,7 @@ Menu::Menu() {
 
     // Konfiguracja przycisku EXIT
     hard.setFont(font);
-    hard.setString("Hard");
+    hard.setString("HARD");
     hard.setCharacterSize(50);
     hard.setFillColor(sf::Color::Red);
     hard.setPosition(300, 300);
