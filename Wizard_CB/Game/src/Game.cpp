@@ -14,9 +14,12 @@ void Game::initVariables(int dif)
 	this->Lwall.setSize(sf::Vector2f(10, 1100));
 	this->Lwall.setPos(sf::Vector2f(0, 0));
 	this->Lwall.setColor(0,0,0,0);
-	texture.loadFromFile("./image/zamek.png");
+	if (texture.loadFromFile("./image/zamek.png")) {
+    //std::cerr << "B³¹d ³adowania tekstury" << std::endl;
+    }
+	//texture.loadFromFile("./image/zamek.png");
 	this->ending.setSize(sf::Vector2f(600,600));
-	this->ending.setPosition(sf::Vector2f(15000,-70));
+	this->ending.setPosition(sf::Vector2f(a*15-2000,-70));
 	this->ending.setTexture(&texture);
 	srand(time(NULL));
     trapLos = (rand()%30)+1;
@@ -96,12 +99,13 @@ void Game::initVariables(int dif)
     background.setTextureRect(sf::IntRect(0, 0, a*10, bgTexture.getSize().y));
     background.setPosition(-1000.f, -700.f);
     }
+
 }
 
 void Game::initWindow()
 {
 	this->videomode = sf::VideoMode(a, b);
-	this->window = new sf::RenderWindow(this->videomode, "Game 1", sf::Style::Close | sf::Style::Titlebar);
+	this->window = new sf::RenderWindow(this->videomode, "Game", sf::Style::Close | sf::Style::Titlebar);
 	this->window->setFramerateLimit(120);
 }
 
@@ -140,10 +144,10 @@ void Game::pollEvents()
                 mag_t=1.5;
                 magic.emplace_back();
                 if(typ==1)
-                    magic.back().setMagic(800.f*proficiency,2.f*proficiency,100.f*(proficiency+0.5),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
+                    magic.back().setMagic(800.f*proficiency,2.f*proficiency,100.f*(proficiency+0.25),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
                 if(typ!=1)
                    magic.back().setMagic(1000.f*proficiency,2.f*proficiency,100.f*(proficiency-0.1),2.f,10.f,20.f,2.f,player.GetPosition(),sf::Mouse::getPosition(*window).x,sf::Mouse::getPosition(*window).y-150,typ,this->window);
-                proficiency+=0.05;
+                proficiency+=0.01;
             }
 		}
 	}

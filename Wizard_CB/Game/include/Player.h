@@ -102,6 +102,7 @@ public:
 	const sf::RectangleShape& getShape() const;
 	const float getHp() const;
 	const float getHpMax() const;
+	void setPosition(sf::Vector2f pos);
 
 	void takeDamage(const int damage);
 	void gainHealth(const int health);

@@ -2698,7 +2698,7 @@
 	<SFML/Network/IpAddress.hpp>
 	<vector>
 
-1749804496 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\game.h
+1749821130 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\game.h
 	<iostream>
 	<vector>
 	<ctime>
@@ -2720,7 +2720,7 @@
 	"Magic.h"
 	"Skeleton.h"
 
-1749804496 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\player.h
+1749821246 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\player.h
 	<iostream>
 	<vector>
 	<ctime>
@@ -2789,7 +2789,7 @@
 1749804640 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\enemy.cpp
 	"Enemy.h"
 
-1749806574 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\game.cpp
+1749826756 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\game.cpp
 	"Game.h"
 
 1748518891 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\gamesave.cpp
@@ -2804,7 +2804,7 @@
 1749673015 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\platform.cpp
 	"Platform.h"
 
-1749815476 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\player.cpp
+1749827174 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\player.cpp
 	"Player.h"
 
 1749591862 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\shot_magic.h
@@ -2849,7 +2849,7 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1749664087 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\bonus.cpp
+1749820704 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\bonus.cpp
 	"Bonus.h"
 
 1749661730 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\bonus.h
@@ -2864,7 +2864,7 @@
 	<SFML/Network.hpp>
 	"Collider.h"
 
-1749815345 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\skeleton.cpp
+1749827226 source:c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\src\skeleton.cpp
 	"Skeleton.h"
 
 1749814945 c:\users\damia\onedrive\documents\github\gra_wizard\wizard_cb\game\include\skeleton.h

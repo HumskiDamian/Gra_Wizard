@@ -28,6 +28,9 @@ private:
     sf::RectangleShape background;
     sf::Texture bgTexture;
 
+    int level;
+    sf::RectangleShape secondEnding;
+
 	sf::VideoMode videomode;
 	sf::RenderWindow* window;
 
@@ -90,6 +93,7 @@ public:
 	void render();
     bool getEndgame();
     bool getWin();
+    void initLevel2();
 
 };
 

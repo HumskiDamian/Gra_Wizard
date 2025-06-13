@@ -48,7 +48,7 @@ int Bonus::getTyp(){
     return typ;
 }
 const sf::CircleShape& Bonus::getShape() const{
-    return shape;
+    return typ_a;
 }
 void Bonus::visible(bool b){
     isVisible=b;

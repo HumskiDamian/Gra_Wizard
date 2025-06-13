@@ -2,10 +2,10 @@
 
 void Player::initVariables()
 {
-    frameSize = sf::Vector2i(60, 90); // jedna klatka
+    frameSize = sf::Vector2i(60, 90);
     currentFrame = 0;
     frameTime = 0.f;
-    frameDuration = 0.1f; // czas trwania jednej klatki
+    frameDuration = 0.1f;
     gravity=981.f;
     onGround=false;
     timerMag=0.f;
@@ -374,4 +374,8 @@ void Player::updateAnimation(float dTime)
     texture1.loadFromFile("./image/wizard_1.png"); // zakładam że to sprite z animacją
     this->shape.setTexture(&texture1);
     this->shape.setTextureRect(sf::IntRect(col * frameSize.x, row * frameSize.y, frameSize.x, frameSize.y));
+}
+void Player::setPosition(sf::Vector2f pos){
+    shape.setPosition(pos);
+    barrier.setPosition(pos);
 }

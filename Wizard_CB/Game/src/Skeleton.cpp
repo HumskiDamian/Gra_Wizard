@@ -43,16 +43,16 @@ void Skeleton::updateAnimation(float deltaTime, const Player& player) {
 
     sf::Vector2f playerPos = player.getShape().getPosition();
     sf::Vector2f selfPos = body.getPosition();
-    bool isFacingRight = playerPos.x > selfPos.x;
+    bool isFacingRight = playerPos.x >= selfPos.x;
 
 
     if (isPlayerInRange(player, attackRadius)) {
-        currentFrameY = 3; // atakowanie zawsze w 4 wierszu (row 3)
+        currentFrameY = 3;
         maxFrameX = 3;
 
     }
     else if (isPlayerInRange(player, detectionRadius)) {
-        currentFrameY = isFacingRight ? 2 : 1;
+        currentFrameY = 1;
         maxFrameX = 6;
     }
     else {
@@ -75,6 +75,6 @@ void Skeleton::updateAnimation(float deltaTime, const Player& player) {
         body.setTextureRect(sf::IntRect((currentFrameX + 1) * frameSize.x, texY, -frameSize.x, frameSize.y));
     }
     else {
-        body.setTextureRect(sf::IntRect(texX, texY, frameSize.x, frameSize.y));
+        body.setTextureRect(sf::IntRect(texX, texY-1, frameSize.x, frameSize.y));
     }
 }
