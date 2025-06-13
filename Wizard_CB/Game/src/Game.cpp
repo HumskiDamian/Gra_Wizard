@@ -20,9 +20,10 @@ void Game::initVariables(int dif)
 	//texture.loadFromFile("./image/zamek.png");
 	this->ending.setSize(sf::Vector2f(600,600));
 	this->ending.setPosition(sf::Vector2f(a*15-2000,-70));
+	this->ending.setPosition(sf::Vector2f(1500,-70));
 	this->ending.setTexture(&texture);
 	srand(time(NULL));
-    trapLos = (rand()%30)+1;
+    trapLos = (rand()%30)+10;
     for(int i=1;i<=trapLos;i++){
         traps.emplace_back();
     }
@@ -33,7 +34,7 @@ void Game::initVariables(int dif)
         dLos+=(rand()%1500+200);
 		tr.setPos(dLos);
 	}
-	goblinLos = (rand()%50)+1;
+	goblinLos = (rand()%50)+10;
 	for(int i=1;i<=goblinLos;i++){
         goblins.emplace_back();
     }
@@ -43,17 +44,17 @@ void Game::initVariables(int dif)
 		gob.setPos(dLos);
 		gob.setDmg_hp(dif);
 	}
-	skelLos = (rand()%50)+5;
+	skelLos = (rand()%20)+15;
 	for(int i=1;i<=skelLos;i++){
         skeletons.emplace_back();
     }
 	dLos=1000;
 	for (auto& skel : skeletons) {
-        dLos+=(rand()%2000);
+        dLos+=(rand()%1000);
 		skel.setPos(dLos);
 		skel.setDmg_hp(dif);
 	}
-	platLos = (rand()%10)+1;
+	platLos = (rand()%10)+10;
     for(int i=1;i<=platLos;i++){
         platforms.emplace_back();
         bonus.emplace_back();
@@ -61,7 +62,7 @@ void Game::initVariables(int dif)
     int xLos=500;
     int yLos=200;
     for (auto& plat : platforms) {
-        xLos+=((rand()%1000)+2000);
+        xLos+=((rand()%2000)+2000);
         plat.setSize(sf::Vector2f(300,50));
 		plat.setPos(sf::Vector2f(xLos,yLos+(rand()%200)));
 	}
@@ -99,7 +100,6 @@ void Game::initVariables(int dif)
     background.setTextureRect(sf::IntRect(0, 0, a*10, bgTexture.getSize().y));
     background.setPosition(-1000.f, -700.f);
     }
-
 }
 
 void Game::initWindow()
@@ -227,6 +227,7 @@ void Game::update(float dTime)
             else ++mag;
         }
 	}
+
 	if(ending.getGlobalBounds().intersects(player.getShape().getGlobalBounds())){
         endgame=true;
         win=true;
@@ -282,6 +283,7 @@ void Game::update(float dTime)
 
 void Game::render()
 {
+
 
 	this->window->clear(sf::Color(70,180,220));
 	window->draw(background);
