@@ -20,7 +20,6 @@ void Game::initVariables(int dif)
 	//texture.loadFromFile("./image/zamek.png");
 	this->ending.setSize(sf::Vector2f(600,600));
 	this->ending.setPosition(sf::Vector2f(a*15-2000,-70));
-	this->ending.setPosition(sf::Vector2f(1500,-70));
 	this->ending.setTexture(&texture);
 	srand(time(NULL));
     trapLos = (rand()%30)+10;
